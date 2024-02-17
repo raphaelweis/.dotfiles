@@ -1,0 +1,9 @@
+[user]
+	email = raphael.weis.dev@gmail.com
+	name = Raphaël Weis
+[init]
+	defaultBranch = main
+[pull]
+	rebase = false
+[core]
+	editor = nvim
