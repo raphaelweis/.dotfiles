@@ -21,6 +21,10 @@ size = FONT_SIZE
 ```
 Replace FONT_SIZE which the font-size of your liking. This file is ignored in this repository. Use it to define different default font-sizes for different machines
 
+## Tmux
+
+Nothing to do. Go to [setup](#2-setup)
+
 ## Nvim
 
 You will need to manually install the language servers et formatters that are configured. It is more convenient to just wait until you need something to install it. Python3 and the neovim python module may also be required for latex files.
@@ -50,6 +54,7 @@ After installing stow you can run the following commands to symlink the differen
 ```bash
 mkdir -p ~/.config/git && stow -t ~/.config/git git
 mkdir -p ~/.config/alacritty && stow -t ~/.config/alacritty alacritty
+mkdir -p ~/.config/tmux && stow -t ~/.config/tmux tmux
 mkdir -p ~/.config/nvim && stow -t ~/.config/nvim nvim
 mkdir -p ~/.config/i3status && stow -t ~/.config/i3status i3status
 mkdir -p ~/.config/sway && stow -t ~/.config/sway sway
