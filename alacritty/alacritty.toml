@@ -1,0 +1,7 @@
+import = [
+    "~/.config/alacritty/themes/themes/gruvbox_dark.toml"
+]
+
+[font]
+normal = { family = "JetBrainsMonoNL NF" }
+size = 14
