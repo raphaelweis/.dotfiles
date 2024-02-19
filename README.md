@@ -23,7 +23,11 @@ Replace FONT_SIZE which the font-size of your liking. This file is ignored in th
 
 ## Tmux
 
-Nothing to do. Go to [setup](#2-setup)
+Make sure to install the tmux plugin manager:
+```bash
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
+```
+Once you start tmux for the first time, you will also need to trigger the plugin install with `<prefix>I`
 
 ## Nvim
 
@@ -65,9 +69,9 @@ After installing stow you can run the following commands to symlink the differen
 ```bash
 mkdir -p ~/.config/git && stow -t ~/.config/git git
 mkdir -p ~/.config/alacritty && stow -t ~/.config/alacritty alacritty
-mkdir -p ~/.config/tmux && stow -t ~/.config/tmux tmux
 mkdir -p ~/.config/nvim && stow -t ~/.config/nvim nvim
 mkdir -p ~/.config/i3status && stow -t ~/.config/i3status i3status
 mkdir -p ~/.config/sway && stow -t ~/.config/sway sway
 stow zsh
+stow tmux
 ```
