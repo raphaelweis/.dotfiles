@@ -68,6 +68,9 @@ exec wl-paste -t text --watch clipman store --no-persist
 default_border pixel
 smart_borders on
 
+# Prevent mouse from taking focus by hovering
+focus_follows_mouse no
+
 ### Key bindings
 #
 # Basics:
