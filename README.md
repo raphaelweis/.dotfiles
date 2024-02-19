@@ -35,6 +35,17 @@ git submodule init && git submodule update
 ```
 to also clone the nvim configuration.
 
+After making changes, you will likely be in detached state. To push your changes to the main remote branch, use:
+```bash
+git push origin HEAD:main
+```
+
+Don't forget to update and merge the submodule changes in this repository with:
+```bash
+git submodule update --remote --rebase
+```
+And finally commit the fact that the nvim submodule changed.
+
 ## i3status
 
 Nothing to do. Go to [setup](#2-setup)
