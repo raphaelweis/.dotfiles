@@ -17,9 +17,9 @@ You need to first create a file called `font-size.toml` in `~$HOME/.config/alacr
 In it, put the following:
 ```toml
 [font]
-size = FONT_SIZE
+size = 12
 ```
-Replace FONT_SIZE which the font-size of your liking. This file is ignored in this repository. Use it to define different default font-sizes for different machines
+Replace `12` with the font-size of your liking. This file is ignored in this repository. Use it to define different default font-sizes for different machines
 
 ## Tmux
 
