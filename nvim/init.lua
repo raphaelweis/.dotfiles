@@ -123,22 +123,25 @@ harpoon:setup()
 vim.keymap.set("n", "<leader>a", function()
 	harpoon:list():append()
 end)
-vim.keymap.set("n", "<leader>u", function()
+vim.keymap.set("n", "<leader>y", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
 end)
 
-vim.keymap.set("n", "<C-u>", function()
+vim.keymap.set("n", "<leader>u", function()
 	harpoon:list():select(1)
 end)
-vim.keymap.set("n", "<C-i>", function()
+vim.keymap.set("n", "<leader>i", function()
 	harpoon:list():select(2)
 end)
-vim.keymap.set("n", "<C-o>", function()
+vim.keymap.set("n", "<leader>o", function()
 	harpoon:list():select(3)
 end)
-vim.keymap.set("n", "<C-p>", function()
+vim.keymap.set("n", "<leader>p", function()
 	harpoon:list():select(4)
 end)
+
+-- Snippets configuration
+require("luasnip.loaders.from_vscode").lazy_load()
 
 -- Formatter configuration
 require("formatter").setup({
