@@ -64,20 +64,7 @@ local plugins = {
 	"tpope/vim-fugitive",
 	"nvim-lua/plenary.nvim",
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {} },
-	{
-		"folke/which-key.nvim",
-		event = "VeryLazy",
-		init = function()
-			vim.o.timeout = true
-			vim.o.timeoutlen = 300
-		end,
-		opts = {},
-	},
-	{
-		"ThePrimeagen/harpoon",
-		branch = "harpoon2",
-		opts = {},
-	},
+	{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 	{ "lewis6991/gitsigns.nvim", opts = {} },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
@@ -116,6 +103,7 @@ local plugins = {
 			{ "<c-\\>", "<CMD><C-U>TmuxNavigatePrevious<CR>" },
 		},
 	},
+	"rafamadriz/friendly-snippets",
 	"hrsh7th/nvim-cmp",
 	"hrsh7th/cmp-nvim-lsp",
 	"hrsh7th/cmp-buffer",
@@ -130,8 +118,26 @@ require("lazy").setup(plugins, {})
 -- Harpoon configuration
 local harpoon = require("harpoon")
 
+harpoon:setup()
+
+vim.keymap.set("n", "<leader>a", function()
+	harpoon:list():append()
+end)
 vim.keymap.set("n", "<leader>u", function()
-	harpoon.ui:toggle_quick_menu(harpoon:list()):append()
+	harpoon.ui:toggle_quick_menu(harpoon:list())
+end)
+
+vim.keymap.set("n", "<C-u>", function()
+	harpoon:list():select(1)
+end)
+vim.keymap.set("n", "<C-i>", function()
+	harpoon:list():select(2)
+end)
+vim.keymap.set("n", "<C-o>", function()
+	harpoon:list():select(3)
+end)
+vim.keymap.set("n", "<C-p>", function()
+	harpoon:list():select(4)
 end)
 
 -- Formatter configuration
@@ -185,7 +191,7 @@ cmp.setup({
 })
 
 -- LSP configuration
-vim.keymap.set("n", "<leader>f", vim.diagnostic.open_float)
+vim.keymap.set("n", "<leader>F", vim.diagnostic.open_float)
 vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
 vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
 vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
@@ -212,9 +218,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
 		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-		vim.keymap.set("n", "<leader>f", function()
-			vim.lsp.buf.format({ async = true })
-		end, opts)
 	end,
 })
 
