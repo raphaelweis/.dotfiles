@@ -33,23 +33,6 @@ Once you start tmux for the first time, you will also need to trigger the plugin
 
 You will need to manually install the language servers et formatters that are configured. It is more convenient to just wait until you need something to install it. Python3 and the neovim python module may also be required for latex files.
 
-Additionaly, my nvim configuration is in a git submodule, so that I can use it standalone. After cloning this repository, run:
-```bash
-git submodule init && git submodule update
-```
-to also clone the nvim configuration.
-
-After making changes, you will likely be in detached state. To push your changes to the main remote branch, use:
-```bash
-git push origin HEAD:main
-```
-
-Don't forget to update and merge the submodule changes in this repository with:
-```bash
-git submodule update --remote --rebase
-```
-And finally commit the fact that the nvim submodule changed.
-
 ## i3status
 
 Nothing to do. Go to [setup](#2-setup)
