@@ -60,6 +60,7 @@ vim.opt.rtp:prepend(lazypath)
 -- Lazy configuration
 local plugins = {
 	"tpope/vim-surround",
+	"tpope/vim-repeat",
 	"tpope/vim-fugitive",
 	"nvim-lua/plenary.nvim",
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {} },
