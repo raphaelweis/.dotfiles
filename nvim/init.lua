@@ -63,6 +63,20 @@ local plugins = {
 	"tpope/vim-fugitive",
 	"nvim-lua/plenary.nvim",
 	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {} },
+	{
+		"folke/which-key.nvim",
+		event = "VeryLazy",
+		init = function()
+			vim.o.timeout = true
+			vim.o.timeoutlen = 300
+		end,
+		opts = {},
+	},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		opts = {},
+	},
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 	{ "lewis6991/gitsigns.nvim", opts = {} },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
@@ -111,6 +125,13 @@ local plugins = {
 	"lervag/vimtex",
 }
 require("lazy").setup(plugins, {})
+
+-- Harpoon configuration
+local harpoon = require("harpoon")
+
+vim.keymap.set("n", "<leader>u", function()
+	harpoon.ui:toggle_quick_menu(harpoon:list()):append()
+end)
 
 -- Formatter configuration
 require("formatter").setup({
