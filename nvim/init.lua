@@ -287,3 +287,4 @@ local function setIndentation(filetype, indent_size)
 end
 setIndentation("html", 2)
 setIndentation("yml", 2)
+setIndentation("markdown", 2)
