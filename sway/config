@@ -95,7 +95,7 @@ focus_follows_mouse no
 # Basics:
 #
 # Start a terminal
-bindsym $mod+Return exec $term -e tmux new
+bindsym $mod+Return exec $term
 
 # Start a web browser
 bindsym $mod+q exec firefox
