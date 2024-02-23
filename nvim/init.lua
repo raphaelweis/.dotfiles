@@ -21,12 +21,8 @@ vim.opt.undofile = true
 vim.opt.clipboard:append("unnamedplus")
 
 vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>", { desc = "Dismiss search highlight" })
-
--- Deal with word wrap better
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Go up 1 screen line" })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Go down 1 screen line" })
-
--- Center screen after moving in half pages
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Go up half a page AND center the screen" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Go down half a page AND center the screen" })
 
