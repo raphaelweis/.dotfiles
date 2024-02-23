@@ -53,7 +53,6 @@ vim.opt.rtp:prepend(lazypath)
 -- Lazy configuration
 local plugins = {
 	"tpope/vim-surround",
-	"tpope/vim-repeat",
 	"tpope/vim-fugitive",
 	"nvim-lua/plenary.nvim",
 	{ "ThePrimeagen/harpoon", branch = "harpoon2" },
