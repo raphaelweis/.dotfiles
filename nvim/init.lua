@@ -99,6 +99,11 @@ local plugins = {
 }
 require("lazy").setup(plugins, {})
 
+-- Fugitive configuration
+vim.keymap.set("n", "<leader>;", "<CMD>Git<CR>", { desc = { "Open Fugitive recap window" } })
+vim.keymap.set("n", "<leader>gc", "<CMD>Git commit<CR>", { desc = { "Commit the staged changes" } })
+vim.keymap.set("n", "<C-T>", "<CMD>Git push<CR>", { desc = { "Push changes to the remote" } })
+
 -- Harpoon configuration
 local harpoon = require("harpoon")
 
