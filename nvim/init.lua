@@ -56,7 +56,6 @@ local plugins = {
 	"tpope/vim-repeat",
 	"tpope/vim-fugitive",
 	"nvim-lua/plenary.nvim",
-	{ "ellisonleao/gruvbox.nvim", priority = 1000, config = true, opts = {} },
 	{ "ThePrimeagen/harpoon", branch = "harpoon2" },
 	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
 	{ "lewis6991/gitsigns.nvim", opts = {} },
@@ -289,9 +288,6 @@ vim.keymap.set("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", { desc = "Open a p
 
 -- Vimtex Configuration
 vim.g.vimtex_view_method = "zathura"
-
--- Cmds
-vim.cmd("colorscheme gruvbox")
 
 -- Autocmds
 vim.api.nvim_create_augroup("__formatter__", { clear = true })
