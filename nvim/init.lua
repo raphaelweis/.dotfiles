@@ -6,8 +6,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_node_provider = 0
 vim.g.filetype_plugin = true
 vim.g.filetype_indent = true
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -22,16 +20,15 @@ vim.opt.colorcolumn = "80"
 vim.opt.undofile = true
 vim.opt.clipboard:append("unnamedplus")
 
--- Disable search highlight when pressing escape
-vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>")
+vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>", { desc = "Dismiss search highlight" })
 
 -- Deal with word wrap better
-vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
-vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
+vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Go up 1 screen line" })
+vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Go down 1 screen line" })
 
 -- Center screen after moving in half pages
-vim.keymap.set("n", "<C-u>", "<C-u>zz")
-vim.keymap.set("n", "<C-d>", "<C-d>zz")
+vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Go up half a page AND center the screen" })
+vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Go down half a page AND center the screen" })
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
@@ -80,13 +77,6 @@ local plugins = {
 		end,
 	},
 	{
-		"nvim-tree/nvim-tree.lua",
-		dependencies = { "nvim-tree/nvim-web-devicons" },
-		cmd = { "NvimTreeToggle" },
-		keys = { { "<leader>e", "<CMD>NvimTreeToggle<CR>" } },
-		opts = {},
-	},
-	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
 			"TmuxNavigateLeft",
@@ -122,23 +112,23 @@ harpoon:setup()
 
 vim.keymap.set("n", "<leader>a", function()
 	harpoon:list():append()
-end)
+end, { desc = "Add a file to the harpoon list " })
 vim.keymap.set("n", "<leader>y", function()
 	harpoon.ui:toggle_quick_menu(harpoon:list())
-end)
+end, { desc = "Toggle harpoon quick menu" })
 
 vim.keymap.set("n", "<leader>u", function()
 	harpoon:list():select(1)
-end)
+end, { desc = "Go to harpoon file (1)" })
 vim.keymap.set("n", "<leader>i", function()
 	harpoon:list():select(2)
-end)
+end, { desc = "Go to harpoon file (2)" })
 vim.keymap.set("n", "<leader>o", function()
 	harpoon:list():select(3)
-end)
+end, { desc = "Go to harpoon file (3)" })
 vim.keymap.set("n", "<leader>p", function()
 	harpoon:list():select(4)
-end)
+end, { desc = "Go to harpoon file (4)" })
 
 -- Snippets configuration
 require("luasnip.loaders.from_vscode").lazy_load()
@@ -194,10 +184,10 @@ cmp.setup({
 })
 
 -- LSP configuration
-vim.keymap.set("n", "<leader>F", vim.diagnostic.open_float)
-vim.keymap.set("n", "[d", vim.diagnostic.goto_prev)
-vim.keymap.set("n", "]d", vim.diagnostic.goto_next)
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist)
+vim.keymap.set("n", "<leader>F", vim.diagnostic.open_float, { desc = "Open the diagnostic in a floating window" })
+vim.keymap.set("n", "[d", vim.diagnostic.goto_prev, { desc = "GOTO previous diagnostic" })
+vim.keymap.set("n", "]d", vim.diagnostic.goto_next, { desc = "GOTO next diagnostic" })
+vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "Add the diagnostic list to the location list" })
 vim.api.nvim_create_autocmd("LspAttach", {
 	group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 	callback = function(ev)
@@ -206,21 +196,55 @@ vim.api.nvim_create_autocmd("LspAttach", {
 
 		-- Buffer local mappings.
 		-- See `:help vim.lsp.*` for documentation on any of the below functions
-		local opts = { buffer = ev.buf }
-		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
-		vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-		vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-		vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, opts)
-		vim.keymap.set("n", "<leader>wa", vim.lsp.buf.add_workspace_folder, opts)
-		vim.keymap.set("n", "<leader>wr", vim.lsp.buf.remove_workspace_folder, opts)
+		vim.keymap.set("n", "gD", vim.lsp.buf.declaration, { buffer = ev.buf, desc = "GOTO declaration" })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { buffer = ev.buf, desc = "GOTO definition" })
+		vim.keymap.set(
+			"n",
+			"K",
+			vim.lsp.buf.hover,
+			{ buffer = ev.buf, desc = "Open documentation in a floating window" }
+		)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { buffer = ev.buf, desc = "GOTO implementation" })
+		vim.keymap.set(
+			"n",
+			"<leader>k",
+			vim.lsp.buf.signature_help,
+			{ buffer = ev.buf, desc = "Display signature information about the symbol under the cursor" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>wa",
+			vim.lsp.buf.add_workspace_folder,
+			{ buffer = ev.buf, desc = "Add the folder at path to the workspace folders" }
+		)
+		vim.keymap.set(
+			"n",
+			"<leader>wr",
+			vim.lsp.buf.remove_workspace_folder,
+			{ buffer = ev.buf, desc = "Remove the folder at path to the workspace folders" }
+		)
 		vim.keymap.set("n", "<leader>wl", function()
 			print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-		end, opts)
-		vim.keymap.set("n", "<leader>D", vim.lsp.buf.type_definition, opts)
-		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-		vim.keymap.set({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, opts)
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+		end, { buffer = ev.buf, desc = "List current workspace folders" })
+		vim.keymap.set(
+			"n",
+			"<leader>D",
+			vim.lsp.buf.type_definition,
+			{ buffer = ev.buf, desc = "GOTO type definition" }
+		)
+		vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { buffer = ev.buf, desc = "Rename symbol" })
+		vim.keymap.set(
+			{ "n", "v" },
+			"<leader>ca",
+			vim.lsp.buf.code_action,
+			{ buffer = ev.buf, desc = "Display available code actions " }
+		)
+		vim.keymap.set(
+			"n",
+			"gr",
+			vim.lsp.buf.references,
+			{ buffer = ev.buf, desc = "List all references in the quickfix window" }
+		)
 	end,
 })
 
@@ -257,13 +281,15 @@ require("telescope").setup({
 })
 
 local builtin = require("telescope.builtin")
-vim.keymap.set("n", "<leader>ff", builtin.find_files)
-vim.keymap.set("n", "<leader>fs", builtin.live_grep)
-vim.keymap.set("n", "<leader>fc", builtin.commands)
+vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "Find project files" })
+vim.keymap.set("n", "<leader>fb", builtin.buffers, { desc = "Find current opened buffers" })
+vim.keymap.set("n", "<leader>fm", builtin.keymaps, { desc = "Find all active keymaps" })
+vim.keymap.set("n", "<leader>fs", builtin.live_grep, { desc = "Search for a string" })
+vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Search vim commands" })
 
 -- MarkdownPreview Configuration
 vim.g.mkdp_page_title = "${name}"
-vim.keymap.set("n", "<leader>mp", "<CMD>MarkdownPreview<CR>")
+vim.keymap.set("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", { desc = "Open a preview of the current markdonw file" })
 
 -- Vimtex Configuration
 vim.g.vimtex_view_method = "zathura"
