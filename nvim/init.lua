@@ -28,16 +28,6 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Go down half a page AND center
 vim.keymap.set("c", "<C-k>", "<C-p>", { desc = "Go up in the vim completion list" })
 vim.keymap.set("c", "<C-j>", "<C-n>", { desc = "Go down in the vim completion list" })
 
--- Highlight on yank
-local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
-vim.api.nvim_create_autocmd("TextYankPost", {
-	callback = function()
-		vim.highlight.on_yank()
-	end,
-	group = highlight_group,
-	pattern = "*",
-})
-
 -- Lazy Bootstrap
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -52,13 +42,13 @@ if not vim.loop.fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
--- Lazy configuration
+-- Plugin list
 local plugins = {
 	"tpope/vim-surround",
 	"tpope/vim-fugitive",
 	"nvim-lua/plenary.nvim",
 	{ "ThePrimeagen/harpoon", branch = "harpoon2" },
-	{ "numToStr/Comment.nvim", opts = {}, lazy = false },
+	{ "numToStr/Comment.nvim", opts = {} },
 	{ "lewis6991/gitsigns.nvim", opts = {} },
 	{ "windwp/nvim-autopairs", event = "InsertEnter", opts = {} },
 	{ "mhartington/formatter.nvim", opts = {} },
@@ -71,23 +61,6 @@ local plugins = {
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
-	},
-	{
-		"christoomey/vim-tmux-navigator",
-		cmd = {
-			"TmuxNavigateLeft",
-			"TmuxNavigateDown",
-			"TmuxNavigateUp",
-			"TmuxNavigateRight",
-			"TmuxNavigatePrevious",
-		},
-		keys = {
-			{ "<c-h>", "<CMD><C-U>TmuxNavigateLeft<CR>" },
-			{ "<c-j>", "<CMD><C-U>TmuxNavigateDown<CR>" },
-			{ "<c-k>", "<CMD><C-U>TmuxNavigateUp<CR>" },
-			{ "<c-l>", "<CMD><C-U>TmuxNavigateRight<CR>" },
-			{ "<c-\\>", "<CMD><C-U>TmuxNavigatePrevious<CR>" },
-		},
 	},
 	{ "L3MON4D3/LuaSnip", build = "make install_jsregexp" },
 	"rafamadriz/friendly-snippets",
