@@ -21,7 +21,7 @@ set $term foot
 set $menu dmenu_path | wmenu | xargs swaymsg exec --
 
 # GTK
-set $system_dpi_scaling_factor 1.5
+set $system_dpi_scaling_factor 1.25
 set $cursor_size 24
 set $cursor_theme Adwaita
 
