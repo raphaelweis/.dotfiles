@@ -25,6 +25,8 @@ vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = tr
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true, desc = "Go down 1 screen line" })
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Go up half a page AND center the screen" })
 vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Go down half a page AND center the screen" })
+vim.keymap.set("c", "<C-k>", "<C-p>", { desc = "Go up in the vim completion list" })
+vim.keymap.set("c", "<C-j>", "<C-n>", { desc = "Go down in the vim completion list" })
 
 -- Highlight on yank
 local highlight_group = vim.api.nvim_create_augroup("YankHighlight", { clear = true })
@@ -99,10 +101,11 @@ local plugins = {
 }
 require("lazy").setup(plugins, {})
 
--- Fugitive configuration
-vim.keymap.set("n", "<leader>;", "<CMD>Git<CR>", { desc = { "Open Fugitive recap window" } })
-vim.keymap.set("n", "<leader>gc", "<CMD>Git commit<CR>", { desc = { "Commit the staged changes" } })
-vim.keymap.set("n", "<C-T>", "<CMD>Git push<CR>", { desc = { "Push changes to the remote" } })
+-- Fugitive and gitsigns configuration
+vim.keymap.set("n", "<leader>;", "<CMD>Git<CR>", { desc = "Open Fugitive recap window" })
+vim.keymap.set("n", "<leader>gc", "<CMD>Git commit<CR>", { desc = "Commit the staged changes" })
+vim.keymap.set("n", "<C-T>", "<CMD>Git push<CR>", { desc = "Push changes to the remote" })
+vim.keymap.set("n", "<leader>gb", "<CMD>Gitsigns toggle_current_line_blame<CR>")
 
 -- Harpoon configuration
 local harpoon = require("harpoon")
