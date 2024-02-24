@@ -56,8 +56,6 @@ local plugins = {
 	{ "nvim-telescope/telescope.nvim", branch = "0.1.x" },
 	{
 		"iamcco/markdown-preview.nvim",
-		cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
-		ft = { "markdown" },
 		build = function()
 			vim.fn["mkdp#util#install"]()
 		end,
@@ -77,7 +75,7 @@ require("lazy").setup(plugins, {})
 -- Fugitive and gitsigns configuration
 vim.keymap.set("n", "<leader>;", "<CMD>Git<CR>", { desc = "Open Fugitive recap window" })
 vim.keymap.set("n", "<leader>gc", "<CMD>Git commit<CR>", { desc = "Commit the staged changes" })
-vim.keymap.set("n", "<C-T>", "<CMD>Git push<CR>", { desc = "Push changes to the remote" })
+vim.keymap.set("n", "<C-S-T>", "<CMD>Git push<CR>", { desc = "Push changes to the remote" })
 vim.keymap.set("n", "<leader>gb", "<CMD>Gitsigns toggle_current_line_blame<CR>")
 
 -- Harpoon configuration
@@ -227,6 +225,11 @@ local lspconfig = require("lspconfig")
 lspconfig.clangd.setup({})
 lspconfig.marksman.setup({})
 lspconfig.texlab.setup({})
+lspconfig.bashls.setup({})
+lspconfig.html.setup({})
+lspconfig.cssls.setup({})
+lspconfig.jsonls.setup({})
+lspconfig.tsserver.setup({})
 lspconfig.lua_ls.setup({
 	on_init = function(client)
 		local path = client.workspace_folders[1].name
