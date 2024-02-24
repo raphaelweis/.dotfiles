@@ -84,6 +84,9 @@ export PATH="$HOME/bin:/usr/local/bin:/usr/local/texlive/2023/bin/x86_64-linux:$
 export MANPATH="/usr/local/man:/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
 export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
 
+export EDITOR='nvim'
+export VISUAL='nvim'
+
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
