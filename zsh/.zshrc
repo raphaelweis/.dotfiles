@@ -105,7 +105,6 @@ export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
 
 # enable vi mode
 bindkey -v
