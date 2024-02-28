@@ -20,6 +20,7 @@ vim.opt.colorcolumn = "80"
 vim.opt.scrolloff = 999
 vim.opt.undofile = true
 vim.opt.clipboard:append("unnamedplus")
+vim.opt.wrapscan = false
 
 vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>", { desc = "Dismiss search highlight" })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Go up 1 screen line" })
@@ -266,7 +267,7 @@ vim.keymap.set("n", "<leader>fc", builtin.commands, { desc = "Search vim command
 
 -- MarkdownPreview Configuration
 vim.g.mkdp_page_title = "${name}"
-vim.keymap.set("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", { desc = "Open a preview of the current markdonw file" })
+vim.keymap.set("n", "<leader>mp", "<CMD>MarkdownPreview<CR>", { desc = "Open a preview of the current markdown file" })
 
 -- Vimtex Configuration
 vim.g.vimtex_view_method = "zathura"
