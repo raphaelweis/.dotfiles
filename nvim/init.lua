@@ -17,7 +17,6 @@ vim.opt.signcolumn = "yes"
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.colorcolumn = "80"
-vim.opt.scrolloff = 999
 vim.opt.undofile = true
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.wrapscan = false
