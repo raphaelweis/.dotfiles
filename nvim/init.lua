@@ -228,20 +228,18 @@ lspconfig.html.setup({})
 lspconfig.cssls.setup({})
 lspconfig.jsonls.setup({})
 lspconfig.tsserver.setup({})
-lspconfig.lua_ls.setup({
-	on_init = function(client)
-		local path = client.workspace_folders[1].name
-		if not vim.loop.fs_stat(path .. "/.luarc.json") and not vim.loop.fs_stat(path .. "/.luarc.jsonc") then
-			client.config.settings = vim.tbl_deep_extend("force", client.config.settings, {
-				Lua = {
-					runtime = { version = "LuaJIT" },
-					workspace = { checkThirdParty = false, library = { vim.env.VIMRUNTIME } },
-				},
-			})
-			client.notify("workspace/didChangeConfiguration", { settings = client.config.settings })
-		end
-		return true
-	end,
+vim.lsp.set_log_level("debug")
+require("vim.lsp.log").set_format_func(vim.inspect)
+require("lspconfig").lua_ls.setup({
+	settings = {
+		Lua = {
+			runtime = { version = "LuaJIT" },
+			workspace = {
+				checkThirdParty = false,
+				library = { vim.env.VIMRUNTIME, "${3rd}/luv/library", "${3rd}/busted/library" },
+			},
+		},
+	},
 })
 
 -- Telescope configuration
