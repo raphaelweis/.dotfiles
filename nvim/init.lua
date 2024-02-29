@@ -19,7 +19,6 @@ vim.opt.smartcase = true
 vim.opt.colorcolumn = "80"
 vim.opt.undofile = true
 vim.opt.clipboard:append("unnamedplus")
-vim.opt.wrapscan = false
 
 vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>", { desc = "Dismiss search highlight" })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true, desc = "Go up 1 screen line" })
