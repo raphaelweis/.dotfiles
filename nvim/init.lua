@@ -73,7 +73,6 @@ require("lazy").setup(plugins, {})
 -- Fugitive and gitsigns configuration
 vim.keymap.set("n", "<leader>;", "<CMD>Git<CR>", { desc = "Open Fugitive recap window" })
 vim.keymap.set("n", "<leader>gc", "<CMD>Git commit<CR>", { desc = "Commit the staged changes" })
-vim.keymap.set("n", "<C-S-T>", "<CMD>Git push<CR>", { desc = "Push changes to the remote" })
 vim.keymap.set("n", "<leader>gb", "<CMD>Gitsigns toggle_current_line_blame<CR>")
 
 -- Harpoon configuration
