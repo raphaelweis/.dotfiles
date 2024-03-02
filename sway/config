@@ -67,7 +67,7 @@ output eDP-1 scale $system_dpi_scaling_factor
 #
 input type:keyboard {
 	xkb_layout us,us(intl)
-	xkb_options grp:win_space_toggle,caps:escape
+	xkb_options grp:win_space_toggle
 }
 
 input type:touchpad {
