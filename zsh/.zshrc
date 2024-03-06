@@ -70,7 +70,7 @@ DISABLE_UNTRACKED_FILES_DIRTY="true"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git fzf)
+plugins=(git)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -80,7 +80,7 @@ source $ZSH/oh-my-zsh.sh
 export FZF_CTRL_T_COMMAND="fd --type f --hidden"
 export FZF_ALT_C_COMMAND="fd --type d --hidden"
 
-export PATH="$HOME/bin:/usr/local/bin:/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/bin:/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
 export MANPATH="/usr/local/man:/usr/local/texlive/2023/texmf-dist/doc/man:$MANPATH"
 export INFOPATH="/usr/local/texlive/2023/texmf-dist/doc/info:$INFOPATH"
 
@@ -111,3 +111,4 @@ export VISUAL='nvim'
 
 # enable vi mode
 bindkey -v
+source /usr/share/doc/fzf/examples/key-bindings.zsh
