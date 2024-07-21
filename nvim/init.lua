@@ -271,6 +271,11 @@ require("lazy").setup({
 					highlight = { enable = true },
 					indent = { enable = true },
 				})
+
+        -- Automatic hyprland filetype detection for highlighting.
+				vim.filetype.add({
+					pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
+				})
 			end,
 		},
 		{
