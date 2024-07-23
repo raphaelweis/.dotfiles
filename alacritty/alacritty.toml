@@ -1,49 +1,52 @@
+[colors.bright]
+black = "#323641"
+blue = "#61afef"
+cyan = "#56b6c2"
+green = "#98c379"
+magenta = "#c678dd"
+red = "#e06c75"
+white = "#c8ccd4"
+yellow = "#e5c07b"
+
+[colors.cursor]
+cursor = "#abb2bf"
+text = "#1f2329"
+
+[colors.normal]
+black = "#1f2329"
+blue = "#61afef"
+cyan = "#56b6c2"
+green = "#98c379"
+magenta = "#c678dd"
+red = "#e06c75"
+white = "#abb2bf"
+yellow = "#e5c07b"
+
+[colors.primary]
+background = "#1f2329"
+bright_foreground = "#c8ccd4"
+foreground = "#abb2bf"
+
+[colors.selection]
+background = "#30363f"
+text = "#abb2bf"
+
+[env]
+WINIT_X11_SCALE_FACTOR = "1"
+
 [font]
-normal = { family = "JetBrainsMono Nerd Font", style = "Regular" }
 size = 14
 
+[font.normal]
+family = "JetBrainsMonoNL NF"
+style = "Regular"
+
+[mouse]
+hide_when_typing = true
+
 [window]
-startup_mode="Maximized"
+opacity = 1
 
-###
-
-# TokyoNight Alacritty Colors
-# Default colors
-[colors.primary]
-background = '#1a1b26'
-foreground = '#c0caf5'
-
-#[colors.cursor]
-#cursor = '#c0caf5'
-#text = '#1a1b26'
-
-# Normal colors
-[colors.normal]
-black = '#15161e'
-red = '#f7768e'
-green = '#9ece6a'
-yellow = '#e0af68'
-blue = '#7aa2f7'
-magenta = '#bb9af7'
-cyan = '#7dcfff'
-white = '#a9b1d6'
-
-# Bright colors
-[colors.bright]
-black = '#414868'
-red = '#f7768e'
-green = '#9ece6a'
-yellow = '#e0af68'
-blue = '#7aa2f7'
-magenta = '#bb9af7'
-cyan = '#7dcfff'
-white = '#c0caf5'
-
-# Indexed Colors
-[[colors.indexed_colors]]
-index = 16
-color = '#ff9e64'
-
-[[colors.indexed_colors]]
-index = 17
-color = '#db4b4b'
+[window.padding]
+x = 0
+y = 0
