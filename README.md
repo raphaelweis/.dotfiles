@@ -12,26 +12,21 @@ Nothing to do. Go to [setup](#2-setup)
 
 ## Alacritty
 
-You need to first create a file called `font-size.toml` in `~$HOME/.config/alacritty`.
-
-In it, put the following:
-```toml
-[font]
-size = 12
-```
-Replace `12` with the font-size of your liking. This file is ignored in this repository. Use it to define different default font-sizes for different machines
+Nothing to do. Go to [setup](#2-setup)
 
 ## Tmux
 
 Make sure to install the tmux plugin manager:
+
 ```bash
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
 ```
+
 Once you start tmux for the first time, you will also need to trigger the plugin install with `<prefix>I`
 
 ## Nvim
 
-You will need to manually install the language servers et formatters that are configured. It is more convenient to just wait until you need something to install it. Python3 and the neovim python module may also be required for latex files.
+Run `checkhealth` after installing plugins to find out about missing dependencies, notably for mason.
 
 ## i3status
 
@@ -44,6 +39,14 @@ Make sure to install `sway-bg`, `wmenu`, `alacritty` and `tmux` before starting 
 ## zsh
 
 Install [oh-my-zsh](https://ohmyz.sh/#install) first, then make sure to remove the generated .zshrc before symlinking.
+
+You also need to clone some additionals plugins :
+
+```bash
+git clone https://github.com/zsh-users/zsh-completions ${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions
+git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+```
 
 ## 2. Setup
 
