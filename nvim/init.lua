@@ -54,6 +54,7 @@ require("lazy").setup({
 		{
 			"nvim-lualine/lualine.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
+			opts = {},
 		},
 		{ "windwp/nvim-ts-autotag", opts = {} },
 		{ "lewis6991/gitsigns.nvim", opts = {} },
@@ -272,7 +273,7 @@ require("lazy").setup({
 					indent = { enable = true },
 				})
 
-        -- Automatic hyprland filetype detection for highlighting.
+				-- Automatic hyprland filetype detection for highlighting.
 				vim.filetype.add({
 					pattern = { [".*/hypr/.*%.conf"] = "hyprlang" },
 				})
