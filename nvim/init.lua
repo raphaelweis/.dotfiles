@@ -107,7 +107,6 @@ require("lazy").setup({
 					vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 				local servers = {
-					tsserver = {},
 					nil_ls = {},
 					html = {},
 					cssls = {},
@@ -322,6 +321,10 @@ require("lazy").setup({
 				{ "<leader>fs", "<CMD>Telescope live_grep<CR>" },
 				{ "<leader>gc", "<CMD>Telescope git_branches<CR>" },
 			},
+		},
+		{
+			"pmizio/typescript-tools.nvim",
+			opts = {},
 		},
 		{
 			"ThePrimeagen/harpoon",
