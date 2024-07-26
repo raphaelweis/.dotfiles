@@ -58,7 +58,15 @@ require("lazy").setup({
 		},
 		{ "windwp/nvim-ts-autotag", opts = {} },
 		{ "lewis6991/gitsigns.nvim", opts = {} },
-		{ "stevearc/oil.nvim", opts = {} },
+		{
+			"stevearc/oil.nvim",
+			opts = {
+				keymaps = {
+					["<C-v>"] = { "actions.select", opts = { vertical = true } },
+					["<C-l>"] = false,
+				},
+			},
+		},
 		{
 			"stevearc/dressing.nvim",
 			opts = {
