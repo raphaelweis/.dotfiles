@@ -48,17 +48,31 @@ require("lazy").setup({
 	spec = {
 		"tpope/vim-surround",
 		{ "nvim-lua/plenary.nvim", lazy = true },
+		{ "windwp/nvim-ts-autotag", opts = {} },
+		{ "lewis6991/gitsigns.nvim", opts = {} },
 		{
 			"tpope/vim-fugitive",
 			keys = { { "<leader>;", "<CMD>tab Git<CR>" } },
+		},
+		{
+			"numToStr/Comment.nvim",
+			dependencies = {
+				{
+					"JoosepAlviste/nvim-ts-context-commentstring",
+					opts = { enable_autocmd = false },
+				},
+			},
+			config = function()
+				require("Comment").setup({
+					pre_hook = require("ts_context_commentstring.integrations.comment_nvim").create_pre_hook(),
+				})
+			end,
 		},
 		{
 			"nvim-lualine/lualine.nvim",
 			dependencies = { "nvim-tree/nvim-web-devicons" },
 			opts = {},
 		},
-		{ "windwp/nvim-ts-autotag", opts = {} },
-		{ "lewis6991/gitsigns.nvim", opts = {} },
 		{
 			"stevearc/oil.nvim",
 			opts = {
