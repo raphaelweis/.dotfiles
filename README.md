@@ -48,6 +48,16 @@ git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-m
 git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
 ```
 
+## Hyprland
+
+You need to create `~/.config/hypr/hyprextra.conf` with the following contents :
+
+```
+env=GDK_SCALE, 2
+```
+
+You can add or change lines in this files according to your host's configuration. This file is ignored.
+
 ## 2. Setup
 
 After installing stow you can run the following commands to symlink the different files to their respective places.
