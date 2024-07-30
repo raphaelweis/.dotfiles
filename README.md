@@ -12,7 +12,14 @@ Nothing to do. Go to [setup](#2-setup)
 
 ## Alacritty
 
-Nothing to do. Go to [setup](#2-setup)
+You need to create `~/.config/alacritty/alacritty-extra.conf` with the following contents :
+
+```toml
+[font]
+size = 10
+```
+
+You can add or change lines in this files according to your host's configuration. This file is ignored.
 
 ## Tmux
 

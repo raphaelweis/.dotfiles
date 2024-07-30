@@ -1,3 +1,5 @@
+import = ["~/.config/alacritty/alacritty-extra.toml"]
+
 [colors.bright]
 black = "#323641"
 blue = "#61afef"
@@ -33,9 +35,6 @@ text = "#abb2bf"
 
 [env]
 WINIT_X11_SCALE_FACTOR = "1"
-
-[font]
-size = 14
 
 [font.normal]
 family = "JetBrainsMonoNL NF"
