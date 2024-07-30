@@ -15,8 +15,9 @@ vim.opt.relativenumber = true
 vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes"
 vim.opt.hlsearch = false
-vim.opt.splitright = false
+vim.opt.splitright = true
 vim.opt.undofile = false
+vim.opt.undofile = true
 vim.opt.clipboard:append("unnamedplus")
 
 -- Keymaps
@@ -115,7 +116,7 @@ require("lazy").setup({
 					vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 				local servers = {
-          tsserver = {},
+					tsserver = {},
 					nil_ls = {},
 					html = {},
 					cssls = {},
