@@ -65,6 +65,10 @@ env=GDK_SCALE, 2
 
 You can add or change lines in this files according to your host's configuration. This file is ignored.
 
+## Bin
+
+Make sure the `.local/bin` folder is on your path.
+
 ## 2. Setup
 
 After installing stow you can run the following commands to symlink the different files to their respective places.
@@ -75,6 +79,7 @@ mkdir -p ~/.config/alacritty && stow -t ~/.config/alacritty alacritty
 mkdir -p ~/.config/nvim && stow -t ~/.config/nvim nvim
 mkdir -p ~/.config/i3status && stow -t ~/.config/i3status i3status
 mkdir -p ~/.config/sway && stow -t ~/.config/sway sway
+mkdir -p ~/.local/bin && stow -t ~/.local/bin bin
 stow zsh
 stow tmux
 ```
