@@ -47,13 +47,11 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	spec = {
 		"tpope/vim-surround",
+		"tpope/vim-obsession",
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{ "windwp/nvim-ts-autotag", opts = {} },
 		{ "lewis6991/gitsigns.nvim", opts = {} },
-		{
-			"tpope/vim-fugitive",
-			keys = { { "<leader>;", "<CMD>tab Git<CR>" } },
-		},
+		{ "tpope/vim-fugitive", keys = { { "<leader>;", "<CMD>tab Git<CR>" } } },
 		{
 			"numToStr/Comment.nvim",
 			dependencies = {
