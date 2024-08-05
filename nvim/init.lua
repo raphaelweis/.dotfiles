@@ -339,7 +339,7 @@ require("lazy").setup({
 			branch = "0.1.x",
 			opts = {},
 			keys = {
-				{ "<leader>ff", "<CMD>Telescope find_files<CR>" },
+				{ "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>" },
 				{ "<leader>fs", "<CMD>Telescope live_grep<CR>" },
 				{ "<leader>gc", "<CMD>Telescope git_branches<CR>" },
 			},
