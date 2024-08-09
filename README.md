@@ -82,3 +82,12 @@ stow -t /etc/X11/xorg.conf.d xorg.conf.d
 stow zsh
 stow tmux
 ```
+
+## 3. Helpful commands
+
+The following commands might be helpful:
+
+```bash
+# Copy icons into home to fix cursor issues in certain apps.
+cp /usr/share/icons ~/.icons -r
+```
