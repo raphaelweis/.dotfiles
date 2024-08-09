@@ -75,8 +75,10 @@ mkdir -p ~/.config/alacritty && stow -t ~/.config/alacritty alacritty
 mkdir -p ~/.config/nvim && stow -t ~/.config/nvim nvim
 mkdir -p ~/.config/i3status && stow -t ~/.config/i3status i3status
 mkdir -p ~/.config/sway && stow -t ~/.config/sway sway
+mkdir -p ~/.config/rofi && stow -t ~/.config/rofi rofi
+mkdir -p ~/.config/i3 && stow -t ~/.config/i3 i3
 mkdir -p ~/.local/bin && stow -t ~/.local/bin bin
-mkdir -p ~/.config/rofi && stow -t ~/.local/bin/rofi rofi
+stow -t /etc/X11/xorg.conf.d xorg.conf.d
 stow zsh
 stow tmux
 ```
