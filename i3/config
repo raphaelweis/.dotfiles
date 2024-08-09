@@ -5,7 +5,7 @@
 focus_follows_mouse no
 # default_border none
 hide_edge_borders smart
-font pango:JetBrainsMono NL NF 8
+font pango:JetBrainsMono NL NF 7
 
 #Hide window title bars
 default_border pixel 1
@@ -37,7 +37,11 @@ set $mod Mod4
 # application keybinds
 bindsym $mod+Return exec --no-startup-id alacritty
 bindsym $mod+q exec --no-startup-id firefox
+bindsym $mod+w exec --no-startup-id discord
 bindsym $mod+e exec --no-startup-id nautilus
+bindsym $mod+r exec --no-startup-id spotify
+bindsym $mod+t exec --no-startup-id thunderbird
+bindsym $mod+y exec --no-startup-id postman
 
 bindsym $mod+p exec --no-startup-id dmenu_run
 
@@ -167,10 +171,9 @@ mode "resize" {
   bindsym Up          resize shrink height 10 px or 10 ppt
   bindsym Right       resize grow width 10 px or 10 ppt
 
-# back to normal: Enter or Escape or Mod4+r
+# back to normal: Enter or Escape
   bindsym Return mode "default"
   bindsym Escape mode "default"
-  bindsym $mod+r mode "default"
 }
 
 bindsym $mod+Shift+r mode "resize"
