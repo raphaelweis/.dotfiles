@@ -35,10 +35,6 @@ Once you start tmux for the first time, you will also need to trigger the plugin
 
 Run `checkhealth` after installing plugins to find out about missing dependencies, notably for mason.
 
-## i3status
-
-Nothing to do. Go to [setup](#2-setup)
-
 ## sway
 
 Make sure to install `sway-bg`, `wmenu`, `alacritty` and `tmux` before starting sway.
@@ -80,6 +76,7 @@ mkdir -p ~/.config/nvim && stow -t ~/.config/nvim nvim
 mkdir -p ~/.config/i3status && stow -t ~/.config/i3status i3status
 mkdir -p ~/.config/sway && stow -t ~/.config/sway sway
 mkdir -p ~/.local/bin && stow -t ~/.local/bin bin
+mkdir -p ~/.config/rofi && stow -t ~/.local/bin/rofi rofi
 stow zsh
 stow tmux
 ```
