@@ -33,9 +33,6 @@ foreground = "#abb2bf"
 background = "#30363f"
 text = "#abb2bf"
 
-[env]
-WINIT_X11_SCALE_FACTOR = "1"
-
 [font.normal]
 family = "JetBrainsMonoNL NF"
 style = "Regular"
