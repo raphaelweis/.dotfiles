@@ -84,7 +84,7 @@ bindsym $mod+Mod1+v split v
 bindsym $mod+m fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Shift+s layout stacking
+bindsym $mod+s layout stacking
 bindsym $mod+Shift+w layout tabbed
 bindsym $mod+Shift+e layout toggle split
 
@@ -93,6 +93,9 @@ bindsym $mod+f floating toggle
 
 # change focus between tiling / floating windows
 bindsym $mod+space focus mode_toggle
+
+# take a screenshot
+bindsym $mod+Shift+s exec NOW=$(date +%d-%b-%Y_%H-%M-%S) && maim -s | tee $HOME/Pictures/Screenshots/screenshot_$NOW.png | xclip -selection clipboard -t image/png
 
 # Media and device control keybinds.
 bindsym XF86AudioRaiseVolume exec wpctl set-volume -l 1 @DEFAULT_AUDIO_SINK@ 5%+
