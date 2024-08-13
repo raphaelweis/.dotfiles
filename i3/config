@@ -3,7 +3,6 @@
 #############################
 
 focus_follows_mouse no
-# default_border none
 hide_edge_borders smart
 font pango:JetBrainsMono NL NF 7
 
@@ -14,7 +13,19 @@ for_window [class="^.*"] border pixel 1
 
 bar {
   status_command i3status
+  colors {
+    urgent_workspace #333333 #222222 #888888
+  }
 }
+
+# colors
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #285577
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #333333 #222222 #888888 #292d2e   #222222
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+
+client.background       #ffffff
 
 #############################
 # Execute on login
@@ -25,7 +36,19 @@ exec --no-startup-id rfkill unblock bluetooth
 exec --no-startup-id battery-notifier
 exec --no-startup-id keepassxc
 exec --no-startup-id onedrive --monitor
-exec --no-startup-id discord --start-minimized
+
+exec --no-startup-id firefox --no-remote -P default --class Rfirefox
+exec --no-startup-id alacritty --class RAlacritty -e tmux new-session -s Default
+exec --no-startup-id discord
+exec --no-startup-id spotify
+exec --no-startup-id thunderbird
+
+# Assign some programs to a specific workspace.
+assign [class="^Rfirefox$"] 1
+assign [class="^RAlacritty$"] 2
+assign [class="^discord$"] 4
+assign [class="^Spotify$"] 5
+assign [class="^thunderbird$"] 6
 
 #############################
 # Keymaps
@@ -35,13 +58,13 @@ exec --no-startup-id discord --start-minimized
 set $mod Mod4
 
 # application keybinds
-bindsym $mod+Return exec --no-startup-id alacritty
-bindsym $mod+q exec --no-startup-id firefox
-bindsym $mod+w exec --no-startup-id discord
-bindsym $mod+e exec --no-startup-id nautilus
-bindsym $mod+r exec --no-startup-id spotify
-bindsym $mod+t exec --no-startup-id thunderbird
-bindsym $mod+y exec --no-startup-id postman
+bindsym $mod+Return exec alacritty
+bindsym $mod+q exec firefox
+bindsym $mod+w exec discord
+bindsym $mod+e exec nautilus
+bindsym $mod+r exec spotify
+bindsym $mod+t exec thunderbird
+bindsym $mod+y exec postman
 
 bindsym $mod+p exec --no-startup-id dmenu_run
 
