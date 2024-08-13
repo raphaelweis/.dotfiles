@@ -14,10 +14,11 @@ vim.opt.number = true
 vim.opt.relativenumber = true
 vim.opt.colorcolumn = "80"
 vim.opt.signcolumn = "yes"
-vim.opt.hlsearch = false
 vim.opt.splitright = true
 vim.opt.undofile = false
 vim.opt.undofile = true
+vim.opt.ignorecase = true
+vim.opt.smartcase = true
 vim.opt.clipboard:append("unnamedplus")
 
 -- Keymaps
@@ -25,6 +26,7 @@ vim.keymap.set("n", "<leader>sv", "<CMD>vsplit<CR>")
 vim.keymap.set("n", "<leader>sh", "<CMD>split<CR>")
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
+vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>")
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
