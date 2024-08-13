@@ -13,9 +13,6 @@ for_window [class="^.*"] border pixel 1
 
 bar {
   status_command i3status
-  colors {
-    urgent_workspace #333333 #222222 #888888
-  }
 }
 
 # colors
