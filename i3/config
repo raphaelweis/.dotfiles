@@ -34,7 +34,7 @@ exec --no-startup-id battery-notifier
 exec --no-startup-id keepassxc
 exec --no-startup-id onedrive --monitor
 
-exec --no-startup-id firefox --no-remote -P default --class Rfirefox
+exec --no-startup-id firefox -P default --class Rfirefox
 exec --no-startup-id alacritty --class RAlacritty -e tmux new-session -s Default
 exec --no-startup-id discord
 exec --no-startup-id spotify
