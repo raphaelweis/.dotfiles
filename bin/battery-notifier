@@ -1,28 +1,39 @@
 #!/usr/bin/env bash
 
 sleep 10
+
+low_notified=false
+full_notified=false
+
 while true; do
-    while read line; do
-        value=$(echo $line | sed 's/%//g' | cut -d " " -f 2)
-        key=$(echo $line | sed 's/%//g' | cut -d ":" -f 1)
-
-        if [ $key = 'state' ]; then
-            bat_state=$value
-        else
-            bat_percent=$value
-        fi
-    done < <(upower -i $(upower -e | grep BAT) | grep -E "percentage|state")
-
-    if [ $bat_state == 'discharging' ]; then
-        if [ $bat_percent -lt 20 ]; then
-            dunstify --urgency=CRITICAL "Battery Low" "Level: ${bat_percent}%"
-            paplay /usr/share/sounds/freedesktop/stereo/suspend-error.oga
-        fi
+  while read line; do
+    value=$(echo $line | sed 's/%//g' | cut -d " " -f 2)
+    key=$(echo $line | sed 's/%//g' | cut -d ":" -f 1)
+    if [ $key = 'state' ]; then
+      bat_state=$value
     else
-        if [ $bat_percent -ge 98 ]; then
-            dunstify --urgency=NORMAL "Battery Full" "Level: ${bat_percent}%"
-        fi
+      bat_percent=$value
     fi
+  done < <(upower -i $(upower -e | grep BAT) | grep -E "percentage|state")
 
-    sleep 10
+  if [ $bat_state == 'discharging' ]; then
+    if [ $bat_percent -lt 20 ] && [ "$low_notified" = false ]; then
+      dunstify --urgency=CRITICAL "Battery Low" "Level: ${bat_percent}%"
+      paplay /usr/share/sounds/freedesktop/stereo/suspend-error.oga
+      low_notified=true
+      full_notified=false
+    elif [ $bat_percent -ge 20 ]; then
+      low_notified=false
+    fi
+  else
+    if [ $bat_percent -ge 98 ] && [ "$full_notified" = false ]; then
+      dunstify --urgency=NORMAL "Battery Full" "Level: ${bat_percent}%"
+      full_notified=true
+      low_notified=false
+    elif [ $bat_percent -lt 98 ]; then
+      full_notified=false
+    fi
+  fi
+
+  sleep 10
 done
