@@ -6,10 +6,6 @@ These are my personal dotfiles, used to configure both my desktop and laptop arc
 
 Here are a set of instructions for all the configuration files contained in this repository. All the steps detailed in this section need to be done before following [setup](#2-setup). These instructions you will have at least installed the programs mentionned below.
 
-## Git
-
-Nothing to do. Go to [setup](#2-setup)
-
 ## Alacritty
 
 You need to create `~/.config/alacritty/alacritty-extra.conf` with the following contents :
@@ -77,6 +73,7 @@ mkdir -p ~/.config/i3status && stow -t ~/.config/i3status i3status
 mkdir -p ~/.config/sway && stow -t ~/.config/sway sway
 mkdir -p ~/.config/rofi && stow -t ~/.config/rofi rofi
 mkdir -p ~/.config/i3 && stow -t ~/.config/i3 i3
+mkdir -p ~/.config/picom && stow -t ~/.config/picom picom
 mkdir -p ~/.local/bin && stow -t ~/.local/bin bin
 stow -t /etc/X11/xorg.conf.d xorg.conf.d
 stow zsh
