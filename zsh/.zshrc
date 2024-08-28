@@ -10,6 +10,7 @@ source $ZSH/oh-my-zsh.sh
 
 export ANDROID_HOME=$HOME/Android/Sdk
 export CUCUMBER_PUBLISH_QUIET=true
+export FZF_ALT_C_COMMAND='fd --type d'
 
 bindkey -s "^[s" "tmux-sessionizer\n"
 alias vim='nvim'
