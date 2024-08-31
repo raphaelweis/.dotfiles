@@ -44,14 +44,14 @@ exec --no-startup-id keepassxc
 exec --no-startup-id onedrive --monitor
 exec --no-startup-id picom --fade-in-step=1 --fade-out-step=1
 
-exec --no-startup-id firefox -P default --class Rfirefox
+exec --no-startup-id zen-browser-optimized --class Rzen
 exec --no-startup-id alacritty --class RAlacritty -e tmux new-session -s Default
 exec --no-startup-id discord
 exec --no-startup-id spotify
 exec --no-startup-id thunderbird
 
 # Assign some programs to a specific workspace.
-assign [class="^Rfirefox$"] 1
+assign [class="^Rzen$"] 1
 assign [class="^RAlacritty$"] 2
 assign [class="^discord$"] 4
 assign [class="^Spotify$"] 5
@@ -66,7 +66,7 @@ set $mod Mod4
 
 # application keybinds
 bindsym $mod+Return exec alacritty
-bindsym $mod+q exec firefox
+bindsym $mod+q exec zen-browser-optimized
 bindsym $mod+w exec discord
 bindsym $mod+e exec nautilus
 bindsym $mod+r exec spotify
