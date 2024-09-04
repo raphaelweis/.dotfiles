@@ -13,6 +13,10 @@ fi
 
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$HOME/.local/bin
 
+if ! tmux run 2>/dev/null; then
+  tmux new-session -d -s Default
+fi
+
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
   exec startx
 fi

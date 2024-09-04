@@ -14,3 +14,4 @@ export FZF_ALT_C_COMMAND='fd --type d'
 
 bindkey -s "^[s" "tmux-sessionizer\n"
 alias vim='nvim'
+alias ta='tmux attach'
