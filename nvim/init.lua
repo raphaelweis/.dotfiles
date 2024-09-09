@@ -130,7 +130,7 @@ require("lazy").setup({
 					vim.tbl_deep_extend("force", capabilities, require("cmp_nvim_lsp").default_capabilities())
 
 				local servers = {
-					tsserver = {},
+					ts_ls = {},
 					nil_ls = {},
 					html = {},
 					cssls = {},
