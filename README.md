@@ -76,6 +76,7 @@ mkdir -p ~/.config/i3 && stow -t ~/.config/i3 i3
 mkdir -p ~/.config/picom && stow -t ~/.config/picom picom
 mkdir -p ~/.local/bin && stow -t ~/.local/bin bin
 stow -t /etc/X11/xorg.conf.d xorg.conf.d
+stow wezterm
 stow zsh
 stow tmux
 ```

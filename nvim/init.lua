@@ -50,6 +50,16 @@ require("lazy").setup({
 	spec = {
 		"tpope/vim-surround",
 		"tpope/vim-obsession",
+		{
+			"mrjones2014/smart-splits.nvim",
+			lazy = false,
+			config = function()
+				vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
+				vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
+				vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
+				vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
+			end,
+		},
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{ "windwp/nvim-ts-autotag", opts = {} },
 		{ "lewis6991/gitsigns.nvim", opts = {} },
@@ -266,7 +276,7 @@ require("lazy").setup({
 		},
 		{
 			"navarasu/onedark.nvim",
-			opts = { style = "darker" },
+			opts = { style = "darker", transparent = true },
 		},
 		{
 			"christoomey/vim-tmux-navigator",
