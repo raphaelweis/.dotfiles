@@ -21,3 +21,12 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 if [ -e /home/raphaelw/.nix-profile/etc/profile.d/nix.sh ]; then . /home/raphaelw/.nix-profile/etc/profile.d/nix.sh; fi # added by Nix installer
+
+# >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
+path=('/home/raphaelw/.juliaup/bin' $path)
+export PATH
+
+# <<< juliaup initialize <<<
