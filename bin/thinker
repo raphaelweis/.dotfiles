@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+
+ZOOKEEPER_STARTUP_TIMEOUT=20
+KAFKA_STARTUP_TIMEOUT=10
+
+sessionName="Thinker"
+baseDir="$HOME/D/Thinker-App"
+kafkaHome="$HOME/D/kafka"
+
+nvimWin="nvim"
+kafkaWin="kafka"
+keycloakWin="Keycloak-Auth-Service"
+usWin="User-Service"
+esWin="Embedding-Service"
+qsWin="Quiz-Service"
+fsWin="Feed-Service"
+
+# Check if the session already exists
+tmux has-session -t $sessionName 2>/dev/null
+
+if [ $? = 0 ]; then
+    echo "Session $sessionName already exists. Attaching..."
+    tmux switch-client -t $sessionName || tmux attach-session -t $sessionName
+    exit 0
+fi
+
+# Create the editor window and start neovim
+tmux new-session -d -s $sessionName -n nvim -c $baseDir/Mobile
+tmux send-keys -t $sessionName:$nvimWin "nvim" C-m
+
+# Create the Kafka window with 2 panes. Start zookeeper and kafka server. 
+# We wait 20 seconds before starting the server to ensure zookeeper has had the time to start up.
+tmux new-window -t $sessionName -n $kafkaWin -c $kafkaHome
+tmux split-window -v -t $sessionName:$kafkaWin -c $kafkaHome
+tmux send-keys -t $sessionName:$kafkaWin.0 "bin/zookeeper-server-start.sh config/zookeeper.properties" C-m
+tmux send-keys -t $sessionName:$kafkaWin.1 "sleep $ZOOKEEPER_STARTUP_TIMEOUT && bin/kafka-server-start.sh config/server.properties" C-m
+
+# Pause the script and wait for kafka to properly start.
+echo "------------------------------"
+echo "Thinker backend startup script"
+echo "------------------------------"
+echo
+echo "Waiting $((ZOOKEEPER_STARTUP_TIMEOUT + KAFKA_STARTUP_TIMEOUT)) seconds for zookeeper and kafka to boot up..."
+
+sleep $((ZOOKEEPER_STARTUP_TIMEOUT + KAFKA_STARTUP_TIMEOUT))
+
+# Create the Keycloak window and start the keycloak server.
+tmux new-window -t $sessionName -n $keycloakWin -c $baseDir/$keycloakWin
+tmux send-keys -t $sessionName:$keycloakWin "docker compose up" C-m
+
+# Create the User-Service window and start:
+# - The minIO server
+# - The User-Service
+# - The user activity comsumer script
+tmux new-window -t $sessionName -n $usWin -c $baseDir/$usWin
+tmux split-window -v -t $sessionName:$usWin -c $baseDir/$usWin
+tmux split-window -v -t $sessionName:$usWin -c $baseDir/$usWin
+tmux select-layout -t $sessionName:$usWin even-vertical
+tmux send-keys -t $sessionName:$usWin.0 "source ./venv/bin/activate && python -m app.main" C-m
+tmux send-keys -t $sessionName:$usWin.1 "docker compose up" C-m
+tmux send-keys -t $sessionName:$usWin.2 "source ./venv/bin/activate && python batch/user_activity_consumer.py" C-m
+
+# Create the Embedding-Service window and start:
+# - The qdrant server
+# - The Embedding-Service
+# - The scheduler batch script
+tmux new-window -t $sessionName -n $esWin -c $baseDir/$esWin
+tmux split-window -v -t $sessionName:$esWin -c $baseDir/$esWin
+tmux split-window -v -t $sessionName:$esWin -c $baseDir/$esWin
+tmux select-layout -t $sessionName:$esWin even-vertical
+tmux send-keys -t $sessionName:$esWin.0 "source ./venv/bin/activate && python -m app.main" C-m
+tmux send-keys -t $sessionName:$esWin.1 "docker compose up" C-m
+tmux send-keys -t $sessionName:$esWin.2 "source ./venv/bin/activate && python -m batch.scheduler" C-m
+
+# Create the Quiz-Service window and start:
+# - The Quiz-Service
+# - The like_processor batch script
+# - The scheduler batch script
+# - The view_processor_cache batch script
+# - The view_processor_db script
+tmux new-window -t $sessionName -n $qsWin -c $baseDir/$qsWin
+tmux split-window -v -t $sessionName:$qsWin -c $baseDir/$qsWin
+tmux split-window -v -t $sessionName:$qsWin -c $baseDir/$qsWin
+tmux split-window -h -t $sessionName:$qsWin.1 -c $baseDir/$qsWin
+tmux split-window -h -t $sessionName:$qsWin.3 -c $baseDir/$qsWin
+tmux send-keys -t $sessionName:$qsWin.0 "source ./venv/bin/activate && python -m app.main" C-m
+tmux send-keys -t $sessionName:$qsWin.1 "source ./venv/bin/activate && python batch/like_processor.py" C-m
+tmux send-keys -t $sessionName:$qsWin.2 "source ./venv/bin/activate && python batch/scheduler.py" C-m
+tmux send-keys -t $sessionName:$qsWin.3 "source ./venv/bin/activate && python batch/view_processor_cache.py" C-m
+tmux send-keys -t $sessionName:$qsWin.4 "source ./venv/bin/activate && python batch/view_processor_db.py" C-m
+
+# Create the Feed-Service window and start:
+# - The Feed-Service
+# - The user_activity_consumer batch script
+# - The scheduler batch script
+tmux new-window -t $sessionName -n $fsWin -c $baseDir/$fsWin
+tmux split-window -v -t $sessionName:$fsWin -c $baseDir/$fsWin
+tmux split-window -v -t $sessionName:$fsWin -c $baseDir/$fsWin
+tmux select-layout -t $sessionName:$fsWin even-vertical
+tmux send-keys -t $sessionName:$fsWin.0 "source ./venv/bin/activate && python -m app.main" C-m
+tmux send-keys -t $sessionName:$fsWin.1 "source ./venv/bin/activate && python batch/user_activity_consumer.py" C-m
+tmux send-keys -t $sessionName:$fsWin.2 "source ./venv/bin/activate && python batch/scheduler.py" C-m
+
+# Switch to editor window
+tmux select-window -t $sessionName:$nvimWin
+
+# Switch to the session
+tmux switch-client -t $sessionName || tmux attach-session -t $sessionName
