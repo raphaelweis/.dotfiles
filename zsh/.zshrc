@@ -8,9 +8,16 @@ plugins=(git fzf zsh-autosuggestions zsh-syntax-highlighting)
 fpath+=${ZSH_CUSTOM:-${ZSH:-~/.oh-my-zsh}/custom}/plugins/zsh-completions/src
 source $ZSH/oh-my-zsh.sh
 
-export ANDROID_HOME=$HOME/Android/Sdk
 export CUCUMBER_PUBLISH_QUIET=true
 export FZF_ALT_C_COMMAND='fd --type d'
+
+if [[ $(systemd-detect-virt) == "wsl" ]]; then
+  export ANDROID_HOME="/mnt/c/Users/rapha/AppData/Local/Android/Sdk"
+else
+  export ANDROID_HOME="$HOME/Android/Sdk"
+fi
+
+export PATH=$PATH:"$ANDROID_HOME/emulator:":"$ANDROID_HOME/cmdline-tools/latest/bin":"$ANDROID_HOME/platform-tools"
 
 bindkey -s "^[s" "tmux-sessionizer\n"
 alias vim='nvim'
