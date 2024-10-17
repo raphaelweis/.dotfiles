@@ -50,6 +50,7 @@ require("lazy").setup({
 	spec = {
 		"tpope/vim-surround",
 		"tpope/vim-obsession",
+		"mfussenegger/nvim-jdtls",
 		{
 			"mrjones2014/smart-splits.nvim",
 			lazy = false,
@@ -109,12 +110,7 @@ require("lazy").setup({
 		},
 		{
 			"neovim/nvim-lspconfig",
-			dependencies = {
-				{ "williamboman/mason.nvim", config = true },
-				"williamboman/mason-lspconfig.nvim",
-				"WhoIsSethDaniel/mason-tool-installer.nvim",
-				{ "folke/neodev.nvim", opts = {} },
-			},
+			dependencies = { { "folke/neodev.nvim", opts = {} } },
 			config = function()
 				vim.api.nvim_create_autocmd("LspAttach", {
 					group = vim.api.nvim_create_augroup("r-lsp-attach", { clear = true }),
@@ -182,26 +178,6 @@ require("lazy").setup({
 						},
 					},
 				}
-
-				require("mason").setup()
-
-				local ensure_installed = vim.tbl_keys(servers or {})
-				vim.list_extend(ensure_installed, {
-					"stylua",
-					"prettier",
-				})
-				require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
-
-				require("mason-lspconfig").setup({
-					handlers = {
-						function(server_name)
-							local server = servers[server_name] or {}
-							server.capabilities =
-								vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-							require("lspconfig")[server_name].setup(server)
-						end,
-					},
-				})
 			end,
 		},
 		{
@@ -343,6 +319,7 @@ require("lazy").setup({
 					sh = { "shfmt" },
 					bash = { "shfmt" },
 					zsh = { "shfmt" },
+					java = { "google-java-format" },
 				},
 			},
 		},
