@@ -4,19 +4,16 @@ export QT_STYLE_OVERRIDE=adwaita-dark
 export MOZ_USE_XINPUT2=1
 export XCURSOR_THEME=Adwaita
 export ANDROID_HOME=$HOME/Android/Sdk
+export XCURSOR_SIZE=48
+export CUCUMBER_PUBLISH_QUIET=true
+export FZF_ALT_C_COMMAND='fd --type d'
 
-if [ "$(hostname)" = "rDesktop" ]; then
-  export XCURSOR_SIZE=24
-else
-  export XCURSOR_SIZE=48
-fi
-
-export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$HOME/.local/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin:$HOME/.local/bin
 
 if ! tmux run 2>/dev/null; then
   tmux new-session -d -s Default
 fi
 
 if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  exec startx
+  exec sway
 fi

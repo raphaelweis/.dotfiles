@@ -1,5 +1,3 @@
-import = ["~/.config/alacritty/alacritty-extra.toml"]
-
 [colors.bright]
 black = "#323641"
 blue = "#61afef"
@@ -25,13 +23,16 @@ white = "#abb2bf"
 yellow = "#e5c07b"
 
 [colors.primary]
-background = "#1f2329"
+background = "#000000"
 bright_foreground = "#c8ccd4"
 foreground = "#abb2bf"
 
 [colors.selection]
 background = "#30363f"
 text = "#abb2bf"
+
+[font]
+size = 11
 
 [font.normal]
 family = "JetBrainsMonoNL NF"
