@@ -22,8 +22,6 @@ vim.opt.smartcase = true
 vim.opt.clipboard:append("unnamedplus")
 
 -- Keymaps
-vim.keymap.set("n", "<leader>sv", "<CMD>vsplit<CR>")
-vim.keymap.set("n", "<leader>sh", "<CMD>split<CR>")
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set("n", "<Esc>", "<CMD>noh<CR>")
@@ -51,16 +49,6 @@ require("lazy").setup({
 		"tpope/vim-surround",
 		"tpope/vim-obsession",
 		"mfussenegger/nvim-jdtls",
-		{
-			"mrjones2014/smart-splits.nvim",
-			lazy = false,
-			config = function()
-				vim.keymap.set("n", "<C-h>", require("smart-splits").move_cursor_left)
-				vim.keymap.set("n", "<C-j>", require("smart-splits").move_cursor_down)
-				vim.keymap.set("n", "<C-k>", require("smart-splits").move_cursor_up)
-				vim.keymap.set("n", "<C-l>", require("smart-splits").move_cursor_right)
-			end,
-		},
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{ "windwp/nvim-ts-autotag", opts = {} },
 		{ "lewis6991/gitsigns.nvim", opts = {} },

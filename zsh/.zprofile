@@ -9,11 +9,3 @@ export CUCUMBER_PUBLISH_QUIET=true
 export FZF_ALT_C_COMMAND='fd --type d'
 
 export PATH=$PATH:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$ANDROID_HOME/cmdline-tools/latest/bin:$HOME/.local/bin
-
-if ! tmux run 2>/dev/null; then
-  tmux new-session -d -s Default
-fi
-
-if [ -z $DISPLAY ] && [ "$(tty)" = "/dev/tty1" ]; then
-  exec sway
-fi

@@ -2,9 +2,6 @@ local wezterm = require("wezterm")
 local mux = wezterm.mux
 local act = wezterm.action
 
--- Plugins
-local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
-
 local config = wezterm.config_builder()
 
 config = {
@@ -14,6 +11,7 @@ config = {
 	font_size = 10,
 	window_decorations = "RESIZE",
 	enable_tab_bar = true,
+	use_fancy_tab_bar = false,
 	keys = {
 		{ key = "1", mods = "ALT", action = act.ActivateTab(0) },
 		{ key = "2", mods = "ALT", action = act.ActivateTab(1) },
@@ -25,8 +23,12 @@ config = {
 		{ key = "8", mods = "ALT", action = act.ActivateTab(7) },
 		{ key = "9", mods = "ALT", action = act.ActivateTab(8) },
 		{ key = "0", mods = "ALT", action = act.ActivateTab(9) },
-		{ key = "h", mods = "ALT|CTRL", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
+		{ key = "s", mods = "ALT|CTRL", action = act.SplitVertical({ domain = "CurrentPaneDomain" }) },
 		{ key = "v", mods = "ALT|CTRL", action = act.SplitHorizontal({ domain = "CurrentPaneDomain" }) },
+		{ key = "h", mods = "ALT|CTRL", action = act.ActivatePaneDirection("Left") },
+		{ key = "j", mods = "ALT|CTRL", action = act.ActivatePaneDirection("Down") },
+		{ key = "k", mods = "ALT|CTRL", action = act.ActivatePaneDirection("Up") },
+		{ key = "l", mods = "ALT|CTRL", action = act.ActivatePaneDirection("Right") },
 		{ key = "0", mods = "CTRL", action = act.ResetFontSize },
 		{ key = "+", mods = "CTRL", action = act.IncreaseFontSize },
 		{ key = "-", mods = "CTRL", action = act.DecreaseFontSize },
@@ -36,8 +38,6 @@ config = {
 		{ key = "W", mods = "SHIFT|CTRL", action = act.CloseCurrentPane({ confirm = true }) },
 	},
 }
-
-smart_splits.apply_to_config(config)
 
 wezterm.on("gui-startup", function(cmd)
 	local _, _, window = mux.spawn_window(cmd or {})
