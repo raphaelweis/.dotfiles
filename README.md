@@ -57,6 +57,14 @@ env=GDK_SCALE, 2
 
 You can add or change lines in this files according to your host's configuration. This file is ignored.
 
+## Wezterm
+
+If you are using wezterm on windows, you will have to symlink the config file using powershell.
+In a new **PowerShell Administrator Window**, run:
+```powershell
+New-Item -ItemType SymbolicLink -Path "C:\Users\rapha\.wezterm.lua" -Target "\\wsl$\Ubuntu\home\raphaelw\.dotfiles\wezterm\.wezterm.lua"
+```
+
 ## Bin
 
 Make sure the `.local/bin` folder is on your path.

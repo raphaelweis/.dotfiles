@@ -5,32 +5,14 @@ local act = wezterm.action
 -- Plugins
 local smart_splits = wezterm.plugin.require("https://github.com/mrjones2014/smart-splits.nvim")
 
--- Execute an os command and capture the output
-function os.capture(cmd, raw)
-	local f = assert(io.popen(cmd, "r"))
-	local s = assert(f:read("*a"))
-	f:close()
-	if raw then
-		return s
-	end
-	s = string.gsub(s, "^%s+", "")
-	s = string.gsub(s, "%s+$", "")
-	return s
-end
-
 local config = wezterm.config_builder()
 
-local font_size
-if os.capture("hostname") == "rDesktop" then
-	font_size = 14
-else
-	font_size = 14
-end
-
 config = {
-	font = wezterm.font("JetBrainsMono NL NF"),
-	font_size = font_size,
-	window_decorations = "NONE",
+	default_prog = { "ubuntu.exe" },
+	window_close_confirmation = "NeverPrompt",
+	font = wezterm.font("JetBrainsMonoNL Nerd Font"),
+	font_size = 10,
+	window_decorations = "RESIZE",
 	enable_tab_bar = true,
 	keys = {
 		{ key = "1", mods = "ALT", action = act.ActivateTab(0) },
