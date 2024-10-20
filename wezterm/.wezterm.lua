@@ -5,8 +5,15 @@ local act = wezterm.action
 local config = wezterm.config_builder()
 
 config = {
-	default_prog = { "ubuntu.exe" },
-	window_close_confirmation = "NeverPrompt",
+	default_domain = "WSL:Ubuntu",
+	wsl_domains = {
+		{
+			name = "WSL:Ubuntu",
+			distribution = "Ubuntu",
+			default_cwd = "~",
+		},
+	},
+	window_close_confirmation = "AlwaysPrompt",
 	font = wezterm.font("JetBrainsMonoNL Nerd Font"),
 	font_size = 10,
 	window_decorations = "RESIZE",
@@ -35,7 +42,7 @@ config = {
 		{ key = "=", mods = "CTRL", action = act.IncreaseFontSize },
 		{ key = "R", mods = "CTRL", action = act.ReloadConfiguration },
 		{ key = "T", mods = "SHIFT|CTRL", action = act.SpawnTab("CurrentPaneDomain") },
-		{ key = "W", mods = "SHIFT|CTRL", action = act.CloseCurrentPane({ confirm = true }) },
+		{ key = "W", mods = "SHIFT|CTRL", action = act.CloseCurrentPane({ confirm = false }) },
 	},
 }
 
