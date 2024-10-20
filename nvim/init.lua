@@ -175,6 +175,11 @@ require("lazy").setup({
 						},
 					},
 				}
+
+				local lspconfig = require("lspconfig")
+				for server, serverConfig in pairs(servers) do
+					lspconfig[server].setup(serverConfig)
+				end
 			end,
 		},
 		{
