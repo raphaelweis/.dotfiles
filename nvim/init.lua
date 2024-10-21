@@ -257,23 +257,6 @@ require("lazy").setup({
 			opts = { style = "darker", transparent = true },
 		},
 		{
-			"christoomey/vim-tmux-navigator",
-			cmd = {
-				"TmuxNavigateLeft",
-				"TmuxNavigateDown",
-				"TmuxNavigateUp",
-				"TmuxNavigateRight",
-				"TmuxNavigatePrevious",
-			},
-			keys = {
-				{ "<c-h>", "<CMD><C-U>TmuxNavigateLeft<CR>" },
-				{ "<c-j>", "<CMD><C-U>TmuxNavigateDown<CR>" },
-				{ "<c-k>", "<CMD><C-U>TmuxNavigateUp<CR>" },
-				{ "<c-l>", "<CMD><C-U>TmuxNavigateRight<CR>" },
-				{ "<c-\\>", "<CMD><C-U>TmuxNavigatePrevious<CR>" },
-			},
-		},
-		{
 			"nvim-treesitter/nvim-treesitter",
 			build = ":TSUpdate",
 			config = function()

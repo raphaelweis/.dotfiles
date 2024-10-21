@@ -58,7 +58,7 @@ config = {
 				local mobileTab, expoPane, _ = thinkerWindow:spawn_tab({
 					cwd = thinkerDir .. "/Mobile",
 				})
-				mobileTab:set_title("editor")
+				mobileTab:set_title("Mobile")
 				local mobileCmdPane = expoPane:split({
 					direction = "Right",
 					cwd = thinkerDir .. "/Mobile",
