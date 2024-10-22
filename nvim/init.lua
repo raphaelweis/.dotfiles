@@ -119,6 +119,7 @@ require("lazy").setup({
 						map("<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
 						map("<leader>gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
 						map("<leader>gt", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+						map("<leader><F2>", require("telescope.builtin").diagnostics, "Type [D]efinition")
 						map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
 						map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
 						map("K", vim.lsp.buf.hover, "Hover Documentation")
@@ -146,7 +147,7 @@ require("lazy").setup({
 					bashls = {},
 					eslint = {
 						on_attach = function()
-							vim.keymap.set("n", "<leader>fm", "<CMD>EslintFixAll<CR>")
+							vim.keymap.set("n", "<leader>fa", "<CMD>EslintFixAll<CR>")
 						end,
 					},
 					lua_ls = {
@@ -182,6 +183,7 @@ require("lazy").setup({
 				end
 			end,
 		},
+		{ "dmmulroy/tsc.nvim", opts = {} },
 		{
 			"hrsh7th/nvim-cmp",
 			event = "InsertEnter",
@@ -275,38 +277,44 @@ require("lazy").setup({
 		},
 		{
 			"stevearc/conform.nvim",
-			event = { "BufWritePre" },
-			cmd = { "ConformInfo" },
-			keys = {
-				{
-					"<leader>fm",
-					function()
-						require("conform").format({ async = true })
-					end,
-				},
-			},
-			opts = {
-				formatters_by_ft = {
-					lua = { "stylua" },
-					nix = { "nixfmt" },
-					javascript = { "prettier" },
-					javascriptreact = { "prettier" },
-					typescript = { "prettier" },
-					typescriptreact = { "prettier" },
-					css = { "prettier" },
-					html = { "prettier" },
-					json = { "prettier" },
-					jsonc = { "prettier" },
-					yaml = { "prettier" },
-					markdown = { "prettier" },
-					python = { "black" },
-					c = { "clang-format" },
-					sh = { "shfmt" },
-					bash = { "shfmt" },
-					zsh = { "shfmt" },
-					java = { "google-java-format" },
-				},
-			},
+			config = function()
+				require("conform").setup({
+					formatters_by_ft = {
+						lua = { "stylua" },
+						nix = { "nixfmt" },
+						javascript = { "prettier" },
+						javascriptreact = { "prettier" },
+						typescript = { "prettier" },
+						typescriptreact = { "prettier" },
+						css = { "prettier" },
+						html = { "prettier" },
+						json = { "prettier" },
+						jsonc = { "prettier" },
+						yaml = { "prettier" },
+						markdown = { "prettier" },
+						python = { "black" },
+						c = { "clang-format" },
+						sh = { "shfmt" },
+						bash = { "shfmt" },
+						zsh = { "shfmt" },
+						java = { "google-java-format" },
+					},
+				})
+
+				vim.api.nvim_create_user_command("Format", function(args)
+					local range = nil
+					if args.count ~= -1 then
+						local end_line = vim.api.nvim_buf_get_lines(0, args.line2 - 1, args.line2, true)[1]
+						range = {
+							start = { args.line1, 0 },
+							["end"] = { args.line2, end_line:len() },
+						}
+					end
+					require("conform").format({ async = true, lsp_format = "fallback", range = range })
+				end, { range = true })
+
+				vim.keymap.set("n", "<leader>fm", "<CMD>Format<CR>")
+			end,
 		},
 		{
 			"nvim-telescope/telescope.nvim",
