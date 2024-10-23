@@ -7,6 +7,8 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+vim.opt.cursorcolumn = true
+vim.opt.cursorline = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
 vim.opt.expandtab = true
@@ -112,20 +114,25 @@ require("lazy").setup({
 				vim.api.nvim_create_autocmd("LspAttach", {
 					group = vim.api.nvim_create_augroup("r-lsp-attach", { clear = true }),
 					callback = function(event)
-						local map = function(keys, func, desc)
-							vim.keymap.set("n", keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
+						local map = function(modes, keys, func, desc)
+							vim.keymap.set(modes, keys, func, { buffer = event.buf, desc = "LSP: " .. desc })
 						end
-						map("<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
-						map("<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
-						map("<leader>gi", require("telescope.builtin").lsp_implementations, "[G]oto [I]mplementation")
-						map("<leader>gt", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
-						map("<leader><F2>", require("telescope.builtin").diagnostics, "Type [D]efinition")
-						map("<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
-						map("<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
-						map("K", vim.lsp.buf.hover, "Hover Documentation")
-						map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
-						map("<F2>", vim.diagnostic.goto_next, "Go to next diagnostic")
-						map("<F2>", vim.diagnostic.goto_prev, "Go to previous diagnostic")
+						map("n", "<leader>gd", require("telescope.builtin").lsp_definitions, "[G]oto [D]efinition")
+						map("n", "<leader>gr", require("telescope.builtin").lsp_references, "[G]oto [R]eferences")
+						map(
+							"n",
+							"<leader>gi",
+							require("telescope.builtin").lsp_implementations,
+							"[G]oto [I]mplementation"
+						)
+						map("n", "<leader>gt", require("telescope.builtin").lsp_type_definitions, "Type [D]efinition")
+						map("n", "<leader><F2>", require("telescope.builtin").diagnostics, "Type [D]efinition")
+						map("n", "<leader>rn", vim.lsp.buf.rename, "[R]e[n]ame")
+						map({ "n", "v" }, "<leader>ca", vim.lsp.buf.code_action, "[C]ode [A]ction")
+						map("n", "K", vim.lsp.buf.hover, "Hover Documentation")
+						map("n", "gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+						map("n", "<F2>", vim.diagnostic.goto_next, "Go to next diagnostic")
+						map("n", "<F2>", vim.diagnostic.goto_prev, "Go to previous diagnostic")
 					end,
 				})
 
@@ -256,7 +263,14 @@ require("lazy").setup({
 		},
 		{
 			"navarasu/onedark.nvim",
-			opts = { style = "darker", transparent = true },
+			opts = {
+				style = "darker",
+				transparent = true,
+				highlights = {
+					CursorColumn = { bg = "#222222" },
+					CursorLine = { bg = "#222222" },
+				},
+			},
 		},
 		{
 			"nvim-treesitter/nvim-treesitter",
@@ -324,6 +338,7 @@ require("lazy").setup({
 				{ "<leader>ff", "<CMD>Telescope find_files hidden=true<CR>" },
 				{ "<leader>fs", "<CMD>Telescope live_grep<CR>" },
 				{ "<leader>gc", "<CMD>Telescope git_branches<CR>" },
+				{ "<leader>fc", "<CMD>Telescope commands<CR>" },
 			},
 		},
 		{
