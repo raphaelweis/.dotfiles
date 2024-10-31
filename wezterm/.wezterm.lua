@@ -226,20 +226,4 @@ config = {
 	},
 }
 
-wezterm.on("gui-startup", function()
-	local homeDir = "/home/raphaelw"
-	local thinkerDir = homeDir .. "/D/Thinker-App"
-
-	-- Configure the thinker workspace
-	local editorTab, _, thinkerWindow = mux.spawn_window({
-		workspace = "Thinker",
-		cwd = thinkerDir .. "/Mobile",
-	})
-	thinkerWindow:gui_window():maximize()
-	editorTab:set_title("Editor")
-	-- Configure the default workspace
-	local _, _, _ = mux.spawn_window({ workspace = "Default" })
-	mux.set_active_workspace("Default")
-end)
-
 return config
