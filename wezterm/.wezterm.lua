@@ -1,10 +1,59 @@
 local wezterm = require("wezterm")
-local mux = wezterm.mux
 local act = wezterm.action
 
 local config = wezterm.config_builder()
 
+local merge_tables = function(first_table, second_table)
+	for k, v in pairs(second_table) do
+		first_table[k] = v
+	end
+	return first_table
+end
+
+local extract_tab_bar_colors_from_theme = function(theme_name)
+	local wez_theme = wezterm.color.get_builtin_schemes()[theme_name]
+	return {
+		window_frame_colors = {
+			bg_color = wezterm.color.parse(wez_theme.background):darken(0.2),
+			fg_color = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
+		},
+		tab_bar_colors = {
+			background = wezterm.color.parse(wez_theme.background):darken(0.2),
+			inactive_tab_edge = wezterm.color.parse(wez_theme.background):darken(0.8),
+			active_tab = {
+				bg_color = wez_theme.background,
+				fg_color = wez_theme.foreground,
+			},
+			inactive_tab = {
+				bg_color = wezterm.color.parse(wez_theme.background):darken(0.2),
+				fg_color = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
+			},
+			inactive_tab_hover = {
+				bg_color = wezterm.color.parse(wez_theme.ansi[8]):lighten(0.1),
+				fg_color = wezterm.color.parse(wez_theme.brights[1]):lighten(0.4),
+			},
+			new_tab = {
+				bg_color = wezterm.color.parse(wez_theme.background):darken(0.2),
+				fg_color = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
+			},
+			new_tab_hover = {
+				bg_color = wezterm.color.parse(wez_theme.ansi[8]):lighten(0.1),
+				fg_color = wezterm.color.parse(wez_theme.brights[1]):lighten(0.4),
+			},
+		},
+	}
+end
+
+local tab_bar_theme = extract_tab_bar_colors_from_theme("One Light (base16)")
+
 config = {
+	color_scheme = "One Light (base16)",
+	window_frame = merge_tables({
+		font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "Medium" }),
+	}, tab_bar_theme.window_frame_colors),
+	colors = {
+		tab_bar = tab_bar_theme.tab_bar_colors,
+	},
 	default_domain = "WSL:Ubuntu",
 	wsl_domains = {
 		{
@@ -55,19 +104,10 @@ config = {
 				local homeDir = "/home/raphaelw"
 				local thinkerDir = homeDir .. "/D/Thinker-App"
 
-				local mobileTab, expoPane, _ = thinkerWindow:spawn_tab({
+				local mobileTab, _, _ = thinkerWindow:spawn_tab({
 					cwd = thinkerDir .. "/Mobile",
 				})
 				mobileTab:set_title("Mobile")
-				local mobileCmdPane = expoPane:split({
-					direction = "Right",
-					cwd = thinkerDir .. "/Mobile",
-					size = 0.5,
-				})
-				local _ = mobileCmdPane:split({
-					direction = "Bottom",
-					cwd = thinkerDir .. "/Mobile",
-				})
 
 				local kafkaTab, zookeeperPane, _ = thinkerWindow:spawn_tab({
 					cwd = homeDir .. "/D/kafka38",
@@ -81,24 +121,14 @@ config = {
 				zookeeperPane:send_text("bin/zookeeper-server-start.sh config/zookeeper.properties\n")
 				kafkaServerPane:send_text("sleep 20 && bin/kafka-server-start.sh config/server.properties\n")
 
-				local keycloakTab, keycloakCmdPane, _ = thinkerWindow:spawn_tab({
+				local keycloakTab, keycloakDockerPane, _ = thinkerWindow:spawn_tab({
 					cwd = thinkerDir .. "/Keycloak-Auth-Service",
-				})
-				local keycloakDockerPane = keycloakCmdPane:split({
-					direction = "Right",
-					cwd = thinkerDir .. "/Keycloak-Auth-Service",
-					size = 0.5,
 				})
 				keycloakTab:set_title("Keycloak")
 				keycloakDockerPane:send_text("docker compose up\n")
 
-				local userServiceTab, userServiceCmdPane, _ = thinkerWindow:spawn_tab({
+				local userServiceTab, userServiceServerPane, _ = thinkerWindow:spawn_tab({
 					cwd = thinkerDir .. "/User-Service",
-				})
-				local userServiceServerPane = userServiceCmdPane:split({
-					direction = "Right",
-					cwd = thinkerDir .. "/User-Service",
-					size = 0.5,
 				})
 				local userServiceDockerPane = userServiceServerPane:split({
 					direction = "Bottom",
@@ -117,13 +147,8 @@ config = {
 					"sleep 30 && source ./venv/bin/activate && python batch/user_activity_consumer.py\n"
 				)
 
-				local embeddingServiceTab, embeddingServiceCmdPane, _ = thinkerWindow:spawn_tab({
+				local embeddingServiceTab, embeddingServiceServerPane, _ = thinkerWindow:spawn_tab({
 					cwd = thinkerDir .. "/Embedding-Service",
-				})
-				local embeddingServiceServerPane = embeddingServiceCmdPane:split({
-					direction = "Right",
-					cwd = thinkerDir .. "/Embedding-Service",
-					size = 0.5,
 				})
 				local embeddingServiceDockerPane = embeddingServiceServerPane:split({
 					direction = "Bottom",
@@ -142,13 +167,8 @@ config = {
 					"sleep 30 && source ./venv/bin/activate && python -m batch.scheduler\n"
 				)
 
-				local quizServiceTab, quizServiceCmdPane, _ = thinkerWindow:spawn_tab({
+				local quizServiceTab, quizServiceServerPane, _ = thinkerWindow:spawn_tab({
 					cwd = thinkerDir .. "/Quiz-Service",
-				})
-				local quizServiceServerPane = quizServiceCmdPane:split({
-					direction = "Right",
-					cwd = thinkerDir .. "/Quiz-Service",
-					size = 0.5,
 				})
 				local quizServiceLikeProcesserPane = quizServiceServerPane:split({
 					direction = "Bottom",
@@ -185,13 +205,8 @@ config = {
 					"sleep 30 && source ./venv/bin/activate && python batch/view_processor_db.py\n"
 				)
 
-				local feedServiceTab, feedServiceCmdPane, _ = thinkerWindow:spawn_tab({
+				local feedServiceTab, feedServiceServerPane, _ = thinkerWindow:spawn_tab({
 					cwd = thinkerDir .. "/Feed-Service",
-				})
-				local feedServiceServerPane = feedServiceCmdPane:split({
-					direction = "Right",
-					cwd = thinkerDir .. "/Feed-Service",
-					size = 0.5,
 				})
 				local feedServiceLikeProcesserPane = feedServiceServerPane:split({
 					direction = "Bottom",
@@ -211,16 +226,6 @@ config = {
 				feedServiceSchedulerPane:send_text(
 					"sleep 30 && source ./venv/bin/activate && python batch/scheduler.py\n"
 				)
-
-				local samplesTab, samplesCmdPane, _ = thinkerWindow:spawn_tab({
-					cwd = thinkerDir .. "/Samples",
-				})
-				local _ = samplesCmdPane:split({
-					direction = "Right",
-					cwd = thinkerDir .. "/Samples",
-					size = 0.5,
-				})
-				samplesTab:set_title("Samples")
 			end),
 		},
 	},
