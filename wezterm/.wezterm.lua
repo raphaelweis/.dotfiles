@@ -14,8 +14,8 @@ local extract_tab_bar_colors_from_theme = function(theme_name)
 	local wez_theme = wezterm.color.get_builtin_schemes()[theme_name]
 	return {
 		window_frame_colors = {
-			bg_color = wezterm.color.parse(wez_theme.background):darken(0.2),
-			fg_color = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
+			active_titlebar_bg = wezterm.color.parse(wez_theme.background):darken(0.2),
+			inactive_titlebar_bg = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
 		},
 		tab_bar_colors = {
 			background = wezterm.color.parse(wez_theme.background):darken(0.2),

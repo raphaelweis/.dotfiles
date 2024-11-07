@@ -49,6 +49,8 @@ require("lazy").setup({
 		"tpope/vim-surround",
 		"tpope/vim-obsession",
 		"mfussenegger/nvim-jdtls",
+		"rakr/vim-one",
+		"projekt0n/github-nvim-theme",
 		{ "nvim-lua/plenary.nvim", lazy = true },
 		{ "windwp/nvim-ts-autotag", opts = {} },
 		{ "lewis6991/gitsigns.nvim", opts = {} },
@@ -367,7 +369,7 @@ require("lazy").setup({
 			end,
 		},
 	},
-	install = { colorscheme = { "onedark" } },
 })
 
-vim.cmd("colorscheme onedark")
+vim.opt.background = "light"
+vim.cmd("colorscheme github_light")
