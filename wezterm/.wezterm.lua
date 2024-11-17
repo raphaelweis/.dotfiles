@@ -3,56 +3,10 @@ local act = wezterm.action
 
 local config = wezterm.config_builder()
 
-local merge_tables = function(first_table, second_table)
-	for k, v in pairs(second_table) do
-		first_table[k] = v
-	end
-	return first_table
-end
-
-local extract_tab_bar_colors_from_theme = function(theme_name)
-	local wez_theme = wezterm.color.get_builtin_schemes()[theme_name]
-	return {
-		window_frame_colors = {
-			active_titlebar_bg = wezterm.color.parse(wez_theme.background):darken(0.2),
-			inactive_titlebar_bg = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
-		},
-		tab_bar_colors = {
-			background = wezterm.color.parse(wez_theme.background):darken(0.2),
-			inactive_tab_edge = wezterm.color.parse(wez_theme.background):darken(0.8),
-			active_tab = {
-				bg_color = wez_theme.background,
-				fg_color = wez_theme.foreground,
-			},
-			inactive_tab = {
-				bg_color = wezterm.color.parse(wez_theme.background):darken(0.2),
-				fg_color = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
-			},
-			inactive_tab_hover = {
-				bg_color = wezterm.color.parse(wez_theme.ansi[8]):lighten(0.1),
-				fg_color = wezterm.color.parse(wez_theme.brights[1]):lighten(0.4),
-			},
-			new_tab = {
-				bg_color = wezterm.color.parse(wez_theme.background):darken(0.2),
-				fg_color = wezterm.color.parse(wez_theme.foreground):lighten(0.5),
-			},
-			new_tab_hover = {
-				bg_color = wezterm.color.parse(wez_theme.ansi[8]):lighten(0.1),
-				fg_color = wezterm.color.parse(wez_theme.brights[1]):lighten(0.4),
-			},
-		},
-	}
-end
-
-local tab_bar_theme = extract_tab_bar_colors_from_theme("One Light (base16)")
-
 config = {
-	color_scheme = "One Light (base16)",
-	window_frame = merge_tables({
+	color_scheme = "One Dark",
+	window_frame = {
 		font = wezterm.font("JetBrainsMonoNL Nerd Font", { weight = "Medium" }),
-	}, tab_bar_theme.window_frame_colors),
-	colors = {
-		tab_bar = tab_bar_theme.tab_bar_colors,
 	},
 	default_domain = "WSL:Ubuntu",
 	wsl_domains = {

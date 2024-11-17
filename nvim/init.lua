@@ -371,5 +371,5 @@ require("lazy").setup({
 	},
 })
 
-vim.opt.background = "light"
-vim.cmd("colorscheme github_light")
+vim.opt.background = "dark"
+vim.cmd("colorscheme github_dark_default")
