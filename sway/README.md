@@ -1,2 +1,0 @@
-# sway
-My Sway configuration

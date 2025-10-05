@@ -1,0 +1,5 @@
+[user]
+	email = raphael.weis.g@gmail.com
+	name = Raphaël Weis
+[push]
+	rebase = true
