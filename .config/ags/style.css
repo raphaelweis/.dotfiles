@@ -1,0 +1,11 @@
+.Bar {
+  background-color: #000000;
+  color: #e6edf3;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 0px 8px;
+}
+
+button {
+  padding: 2px 8px;
+}
