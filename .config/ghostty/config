@@ -1,0 +1,14 @@
+adjust-cursor-thickness = 1
+confirm-close-surface = true
+cursor-invert-fg-bg = true
+cursor-style = block
+cursor-style-blink = false
+font-family = monospace
+font-size = 12
+gtk-single-instance = true
+gtk-titlebar-hide-when-maximized = true
+keybind = ctrl+enter=unbind
+keybind = performable:alt+c=copy_to_clipboard
+keybind = performable:alt+v=paste_from_clipboard
+shell-integration-features = no-cursor
+theme = Github Dark Default
