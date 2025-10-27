@@ -19,7 +19,12 @@ vim.opt.splitright = true
 vim.opt.undofile = true
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
+vim.opt.winborder = "rounded"
+vim.opt.swapfile = false
 vim.opt.clipboard:append("unnamedplus")
+
+-- Miscellaneous
+vim.diagnostic.config({ virtual_text = true })
 
 -- Keymaps
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
@@ -76,11 +81,34 @@ require("lazy").setup({
     end,
   },
 
+  -- Gitsigns
+  {
+    "lewis6991/gitsigns.nvim",
+    opts = {},
+  },
+
   -- Autopairs
   {
     "windwp/nvim-autopairs",
     config = function()
       require("nvim-autopairs").setup()
+    end,
+  },
+
+  -- lualine
+  {
+    "nvim-lualine/lualine.nvim",
+    config = function()
+      require('lualine').setup({
+        options = {
+          component_separators = { left = '|', right = '|' },
+          section_separators = { left = '', right = '' },
+          always_show_tabline = false,
+        },
+        tabline = {
+          lualine_a = { { 'tabs', mode = 2 } },
+        },
+      })
     end,
   },
 
@@ -142,17 +170,6 @@ require("lazy").setup({
     end,
   },
 
-  -- Lualine
-  {
-    "nvim-lualine/lualine.nvim",
-    config = function()
-      require("lualine").setup()
-    end,
-  },
-
-  -- Snippets
-  { "rafamadriz/friendly-snippets" },
-
   -- Conform (formatting)
   {
     'stevearc/conform.nvim',
@@ -179,18 +196,76 @@ require("lazy").setup({
     end,
   },
 
-  -- blink.cmp (completion)
+  -- nvim-cmp (completion)
   {
-    "saghen/blink.cmp",
-    build = 'cargo build --release',
-    opts = {
-      keymap = { preset = "default" },
-      appearance = { nerd_font_variant = "mono" },
-      completion = { documentation = { auto_show = false } },
-      sources = {
-        default = { "lsp", "path", "snippets", "buffer" },
-      },
-      fuzzy = { implementation = "prefer_rust_with_warning" },
+    "hrsh7th/nvim-cmp",
+    dependencies = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'L3MON4D3/LuaSnip',
+      'rafamadriz/friendly-snippets',
     },
+    config = function()
+      local cmp = require 'cmp'
+
+      local cmp_kinds = {
+        Text = '  ',
+        Method = '  ',
+        Function = '  ',
+        Constructor = '  ',
+        Field = '  ',
+        Variable = '  ',
+        Class = '  ',
+        Interface = '  ',
+        Module = '  ',
+        Property = '  ',
+        Unit = '  ',
+        Value = '  ',
+        Enum = '  ',
+        Keyword = '  ',
+        Snippet = '  ',
+        Color = '  ',
+        File = '  ',
+        Reference = '  ',
+        Folder = '  ',
+        EnumMember = '  ',
+        Constant = '  ',
+        Struct = '  ',
+        Event = '  ',
+        Operator = '  ',
+        TypeParameter = '  ',
+      }
+
+      cmp.setup({
+        completion = {
+          completeopt = 'menu,menuone,noinsert'
+        },
+        snippet = {
+          expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+          end,
+        },
+        mapping = cmp.mapping.preset.insert({
+          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+          ['<C-f>'] = cmp.mapping.scroll_docs(4),
+          ['<C-Space>'] = cmp.mapping.complete(),
+          ['<C-e>'] = cmp.mapping.abort(),
+          ['<C-y>'] = cmp.mapping.confirm({ select = true }),
+        }),
+        sources = cmp.config.sources({
+          { name = 'nvim_lsp' },
+          { name = 'luasnip' },
+          { name = 'path' },
+          { name = 'buffer' },
+        }),
+        formatting = {
+          format = function(_, vim_item)
+            vim_item.kind = (cmp_kinds[vim_item.kind] or '') .. vim_item.kind
+            return vim_item
+          end,
+        },
+      })
+    end
   }
 })
