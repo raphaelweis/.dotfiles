@@ -179,8 +179,15 @@ require("lazy").setup({
     opts = {
       formatters_by_ft = {
         lua = { "stylua" },
-        javsascript = { "prettier" },
+        javascript = { "prettier" },
         typescript = { "prettier" },
+        typescriptreact = { "prettier" },
+        javascriptreact = { "prettier" },
+        html = { "prettier" },
+        css = { "prettier" },
+        json = { "prettier" },
+        markdown = { "prettier" },
+        yaml = { "prettier" }
       },
     },
     config = function()
