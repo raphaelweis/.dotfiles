@@ -7,7 +7,7 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
--- Disable netrw
+-- Disable netrw (we use nvim-tree)
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
@@ -53,13 +53,21 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin setup with lazy.nvim
 require("lazy").setup({
 	{
+		"vague-theme/vague.nvim",
+		lazy = false,
+		priority = 1000,
+		config = function()
+			require("vague").setup()
+			vim.cmd("colorscheme vague")
+		end,
+	},
+	{
 		"tpope/vim-fugitive",
 		config = function()
 			vim.keymap.set("n", "<leader>;", "<CMD>tab Git<CR>")
 		end,
 	},
-
-	-- nvim-tree
+	{ "tpope/vim-surround" },
 	{
 		"nvim-tree/nvim-tree.lua",
 		config = function()
@@ -67,13 +75,42 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>")
 		end,
 	},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local harpoon = require("harpoon")
 
-	-- Telescope
+			harpoon:setup()
+
+			vim.keymap.set("n", "<leader>a", function()
+				harpoon:list():add()
+			end)
+			vim.keymap.set("n", "<leader>yf", function()
+				harpoon.ui:toggle_quick_menu(harpoon:list(), { border = "rounded", title_pos = "center" })
+			end)
+
+			vim.keymap.set("n", "<leader>u", function()
+				harpoon:list():select(1)
+			end)
+			vim.keymap.set("n", "<leader>i", function()
+				harpoon:list():select(2)
+			end)
+			vim.keymap.set("n", "<leader>o", function()
+				harpoon:list():select(3)
+			end)
+			vim.keymap.set("n", "<leader>p", function()
+				harpoon:list():select(4)
+			end)
+		end,
+	},
 	{
 		"nvim-telescope/telescope.nvim",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
 			"nvim-tree/nvim-web-devicons",
+			{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 		},
 		config = function()
 			require("telescope").setup({
@@ -86,22 +123,13 @@ require("lazy").setup({
 					},
 				},
 			})
+
+			require("telescope").load_extension("fzf")
+
 			vim.keymap.set("n", "<leader>ff", "<CMD>Telescope find_files<CR>")
 			vim.keymap.set("n", "<leader>fg", "<CMD>Telescope live_grep<CR>")
 		end,
 	},
-
-	{
-		"vague-theme/vague.nvim",
-		lazy = false,
-		priority = 1000,
-		config = function()
-			require("vague").setup()
-			vim.cmd("colorscheme vague")
-		end,
-	},
-
-	-- Vim tmux navigator
 	{
 		"christoomey/vim-tmux-navigator",
 		cmd = {
@@ -120,39 +148,16 @@ require("lazy").setup({
 			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 		},
 	},
-
-	-- Gitsigns
 	{
 		"lewis6991/gitsigns.nvim",
 		opts = {},
 	},
-
-	-- Autopairs
 	{
 		"windwp/nvim-autopairs",
 		config = function()
 			require("nvim-autopairs").setup()
 		end,
 	},
-
-	-- lualine
-	{
-		"nvim-lualine/lualine.nvim",
-		config = function()
-			require("lualine").setup({
-				options = {
-					component_separators = { left = "|", right = "|" },
-					section_separators = { left = "", right = "" },
-					always_show_tabline = false,
-				},
-				tabline = {
-					lualine_a = { { "tabs", mode = 2 } },
-				},
-			})
-		end,
-	},
-
-	-- Treesitter
 	{
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
@@ -163,8 +168,6 @@ require("lazy").setup({
 			})
 		end,
 	},
-
-	-- LSP & Mason
 	{
 		"neovim/nvim-lspconfig",
 		dependencies = {
@@ -183,7 +186,6 @@ require("lazy").setup({
 				},
 			})
 
-			-- Lua LS setup
 			vim.lsp.config("lua_ls", {
 				on_init = function(client)
 					if client.workspace_folders then
@@ -203,7 +205,10 @@ require("lazy").setup({
 						},
 						workspace = {
 							checkThirdParty = false,
-							library = { vim.env.VIMRUNTIME },
+							library = {
+								vim.env.VIMRUNTIME,
+								"${3rd}/luv/library",
+							},
 						},
 					})
 				end,
@@ -214,8 +219,6 @@ require("lazy").setup({
 			vim.lsp.enable("eslint")
 		end,
 	},
-
-	-- Conform (formatting)
 	{
 		"stevearc/conform.nvim",
 		config = function()
@@ -247,8 +250,6 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>fm", "<CMD>Format<CR>")
 		end,
 	},
-
-	-- nvim-cmp (completion)
 	{
 		"hrsh7th/nvim-cmp",
 		dependencies = {
