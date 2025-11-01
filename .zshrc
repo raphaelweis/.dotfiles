@@ -1,5 +1,8 @@
-autoload -U colors && colors
-PS1="%{$fg[magenta]%}%~%{$fg[red]%} %{$reset_color%}$%b "
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="robbyrussell"
+plugins=(git)
+
+source $ZSH/oh-my-zsh.sh
 
 export PATH=$PATH:"$HOME/.local/bin"
 

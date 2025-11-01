@@ -10,6 +10,6 @@ keybind = ctrl+enter=unbind
 keybind = performable:alt+c=copy_to_clipboard
 keybind = performable:alt+v=paste_from_clipboard
 shell-integration-features = no-cursor
-theme = GitHub Dark Default
+theme = Vague
 font-feature = -calt, -liga, -dlig
 

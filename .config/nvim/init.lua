@@ -7,6 +7,10 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+-- Disable netrw
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
 -- Options
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -55,6 +59,15 @@ require("lazy").setup({
 		end,
 	},
 
+	-- nvim-tree
+	{
+		"nvim-tree/nvim-tree.lua",
+		config = function()
+			require("nvim-tree").setup()
+			vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>")
+		end,
+	},
+
 	-- Telescope
 	{
 		"nvim-telescope/telescope.nvim",
@@ -78,13 +91,34 @@ require("lazy").setup({
 		end,
 	},
 
-	-- Colorscheme
 	{
-		"projekt0n/github-nvim-theme",
+		"vague-theme/vague.nvim",
+		lazy = false,
 		priority = 1000,
 		config = function()
-			vim.cmd("colorscheme github_dark_default")
+			require("vague").setup()
+			vim.cmd("colorscheme vague")
 		end,
+	},
+
+	-- Vim tmux navigator
+	{
+		"christoomey/vim-tmux-navigator",
+		cmd = {
+			"TmuxNavigateLeft",
+			"TmuxNavigateDown",
+			"TmuxNavigateUp",
+			"TmuxNavigateRight",
+			"TmuxNavigatePrevious",
+			"TmuxNavigatorProcessList",
+		},
+		keys = {
+			{ "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
+			{ "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
+			{ "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
+			{ "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
+			{ "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+		},
 	},
 
 	-- Gitsigns
