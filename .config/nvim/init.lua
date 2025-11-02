@@ -183,6 +183,10 @@ require("lazy").setup({
 					"stylua",
 					"prettier",
 					"eslint-lsp",
+					"clangd",
+					"clang-format",
+					"tinymist",
+					"typstyle",
 				},
 			})
 
@@ -217,6 +221,9 @@ require("lazy").setup({
 			vim.lsp.enable("lua_ls")
 			vim.lsp.enable("ts_ls")
 			vim.lsp.enable("eslint")
+			vim.lsp.enable("vala_ls")
+			vim.lsp.enable("clangd")
+			vim.lsp.enable("tinymist")
 		end,
 	},
 	{
@@ -234,6 +241,9 @@ require("lazy").setup({
 					json = { "prettier" },
 					markdown = { "prettier" },
 					yaml = { "prettier" },
+					vala = { "uncrustify" },
+					c = { "uncrustify", "clang-format" },
+					typst = { "typstyle" },
 				},
 			})
 			vim.api.nvim_create_user_command("Format", function(args)
