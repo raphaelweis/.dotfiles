@@ -53,12 +53,13 @@ vim.opt.rtp:prepend(lazypath)
 -- Plugin setup with lazy.nvim
 require("lazy").setup({
 	{
-		"vague-theme/vague.nvim",
+		"Mofiqul/vscode.nvim",
 		lazy = false,
 		priority = 1000,
 		config = function()
-			require("vague").setup()
-			vim.cmd("colorscheme vague")
+			require("vscode").setup()
+			vim.o.background = "light"
+			vim.cmd.colorscheme("vscode")
 		end,
 	},
 	{
