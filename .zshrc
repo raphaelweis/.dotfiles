@@ -7,6 +7,7 @@ source $ZSH/oh-my-zsh.sh
 export PATH=$PATH:"$HOME/.local/bin"
 export PATH=$PATH:"$HOME/.codeium/windsurf/bin"
 export PATH=$PATH:"$HOME/.local/share/nvim/mason/bin"
+export PATH=$PATH:"$HOME/Library/Python/3.9/bin"
 export PATH=$PATH:"$HOME/bin"
 
 alias vim='nvim'

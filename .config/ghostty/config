@@ -10,7 +10,7 @@ keybind = ctrl+enter=unbind
 keybind = performable:alt+c=copy_to_clipboard
 keybind = performable:alt+v=paste_from_clipboard
 shell-integration-features = no-cursor
-theme = GitHub Light Default
+theme = Builtin Light
 font-feature = -calt, -liga, -dlig
 command = zsh --login -c "if command -v tmux >/dev/null 2>&1; then tmux attach || tmux new -s default; else zsh; fi"
 
