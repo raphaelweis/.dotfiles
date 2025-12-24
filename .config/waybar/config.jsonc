@@ -1,0 +1,114 @@
+{
+  "layer": "top",
+  "position": "top",
+  "modules-left": [
+    "hyprland/workspaces"
+  ],
+  "modules-center": [
+    "clock"
+  ],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "temperature",
+    "network",
+    "tray",
+    "battery"
+  ],
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true
+  },
+  "clock": {
+    "format": "{:%b %e   %H:%M}",
+    "tooltip": true,
+    "tooltip-format": "<span color='#181D17' font='monospace'>{calendar}</span>",
+    "calendar": {
+      "mode": "year",
+      "mode-mon-col": 3,
+      "format": {
+        "today": "<span color='#3B693A'><b><u>{}</u></b></span>"
+      }
+    }
+  },
+  "cpu": {
+    "format": "   {usage}%",
+    "tooltip": true
+  },
+  "memory": {
+    "format": "    {percentage}%",
+    "tooltip": true
+  },
+  "temperature": {
+    "format": "󰔏  {temperatureC}°C",
+    "critical-threshold": 80,
+    "tooltip": true
+  },
+  "network": {
+    "format-wifi": "󰖩   {bandwidthDownBits}",
+    "format-ethernet": "󰈀  {bandwidthDownBits}",
+    "format-disconnected": "󰖪 ",
+    "tooltip": true,
+    "interval": 5
+  },
+  "tray": {
+    "spacing": 8
+  },
+  "battery": {
+    "states": {
+      "critical": 15
+    },
+    "format": "{icon} {capacity}%",
+    "format-discharging": "{icon} {capacity}%",
+    "format-charging": "{icon} {capacity}%",
+    "format-plugged": "{icon} {capacity}%",
+    "format-full": "{icon} {capacity}%",
+    "format-icons": {
+      "discharging": [
+        "󰂎 ",
+        "󰁺 ",
+        "󰁻 ",
+        "󰁼 ",
+        "󰁽 ",
+        "󰁾 ",
+        "󰁿 ",
+        "󰂀 ",
+        "󰂁 ",
+        "󰂂 ",
+        "󰁹 "
+      ],
+      "plugged": [
+        "󰂅 "
+      ],
+      "charging": [
+        "󰢟 ",
+        "󰢜 ",
+        "󰂆 ",
+        "󰂇 ",
+        "󰂈 ",
+        "󰢝 ",
+        "󰂉 ",
+        "󰢞 ",
+        "󰂊 ",
+        "󰂋 ",
+        "󰂅 "
+      ],
+      "full": [
+        "󰁹 "
+      ],
+      "not-charging": [
+        "󰂎 ",
+        "󰁺 ",
+        "󰁻 ",
+        "󰁼 ",
+        "󰁽 ",
+        "󰁾 ",
+        "󰁿 ",
+        "󰂀 ",
+        "󰂁 ",
+        "󰂂 ",
+        "󰁹 "
+      ]
+    }
+  }
+}
