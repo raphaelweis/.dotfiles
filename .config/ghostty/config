@@ -1,0 +1,30 @@
+# Appearance
+background-opacity = 1
+theme = Builtin Tango Light
+
+font-family = monospace
+font-feature = -calt
+font-size = 12
+
+window-padding-x = 5
+window-padding-y = 5
+
+# Behavior
+confirm-close-surface = true
+shell-integration-features = no-cursor
+
+# Cursor
+cursor-style = block
+cursor-style-blink = false
+cursor-invert-fg-bg = true
+adjust-cursor-thickness = 1
+
+# GTK integration (Linux)
+gtk-titlebar-hide-when-maximized = true
+gtk-single-instance = true
+
+# Keybindings
+keybind = ctrl+enter=unbind
+keybind = performable:alt+c=copy_to_clipboard
+keybind = performable:alt+v=paste_from_clipboard
+
