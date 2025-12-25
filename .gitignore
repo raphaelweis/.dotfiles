@@ -1,4 +1,3 @@
 node_modules/
 @girs/
 .config/tmux/plugins/
-.stow-local-ignore
