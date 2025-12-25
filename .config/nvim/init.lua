@@ -5,8 +5,11 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
 
 vim.opt.number = true
+vim.opt.termguicolors = true
 vim.opt.relativenumber = true
 vim.opt.tabstop = 2
 vim.opt.shiftwidth = 2
@@ -44,6 +47,7 @@ vim.keymap.set("n", "td", function()
 end, {
 	desc = "Toggle diagnostic virtual lines",
 })
+vim.keymap.set("t", "<ESC>", "<C-\\><C-N>")
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
@@ -61,10 +65,15 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
 	{ "christoomey/vim-tmux-navigator" },
 	{
-		"stevearc/oil.nvim",
+		"nvim-tree/nvim-tree.lua",
+		lazy = false,
+		dependencies = {
+			"nvim-tree/nvim-web-devicons",
+		},
 		config = function()
-			require("oil").setup()
-			vim.keymap.set("n", "<leader>e", "<Cmd>Oil<CR>")
+			require("nvim-tree").setup({})
+
+			vim.keymap.set("n", "<leader>e", "<CMD>NvimTreeToggle<CR>")
 		end,
 	},
 	{
@@ -86,7 +95,8 @@ require("lazy").setup({
 		priority = 1000,
 		config = function()
 			require("vscode").setup({
-				transparent = true,
+				transparent = false,
+				disable_nvimtree_bg = true,
 			})
 			vim.cmd.colorscheme("vscode")
 		end,
@@ -207,7 +217,7 @@ require("lazy").setup({
 							and (vim.uv.fs_stat(path .. "/.luarc.json") or vim.uv.fs_stat(path .. "/.luarc.jsonc"))
 						then
 							return
-            end
+						end
 					end
 
 					client.config.settings.Lua = vim.tbl_deep_extend("force", client.config.settings.Lua, {
@@ -290,7 +300,7 @@ require("lazy").setup({
 		build = "make",
 		config = function()
 			require("telescope").load_extension("fzf")
-    end,
+		end,
 	},
 	{
 		"chomosuke/typst-preview.nvim",
