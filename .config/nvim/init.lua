@@ -207,6 +207,7 @@ require("lazy").setup({
 			vim.lsp.enable("prismals")
 			vim.lsp.enable("qmlls")
 			vim.lsp.enable("tinymist")
+			vim.lsp.enable("pyright")
 
 			vim.lsp.config("lua_ls", {
 				on_init = function(client)
