@@ -1,3 +1,5 @@
 node_modules/
 @girs/
 .config/tmux/plugins/
+.config/hypr/hyprland-machine-specific.conf
+

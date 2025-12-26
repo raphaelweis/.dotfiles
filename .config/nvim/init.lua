@@ -5,9 +5,8 @@ vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
 
+vim.opt.background = "light"
 vim.opt.number = true
 vim.opt.termguicolors = true
 vim.opt.relativenumber = true
@@ -48,6 +47,15 @@ end, {
 	desc = "Toggle diagnostic virtual lines",
 })
 vim.keymap.set("t", "<ESC>", "<C-\\><C-N>")
+vim.keymap.set("t", "<C-[>", "<ESC>")
+
+-- Autocmds
+vim.api.nvim_create_autocmd("TermOpen", {
+	callback = function()
+		vim.opt.spell = false
+	end,
+	desc = "Disable spellchecking in terminal windows",
+})
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
