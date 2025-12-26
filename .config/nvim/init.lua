@@ -209,6 +209,11 @@ require("lazy").setup({
 			vim.lsp.enable("tinymist")
 			vim.lsp.enable("pyright")
 
+			vim.lsp.config("tinymist", {
+				settings = {
+					formatterMode = "typstyle",
+				},
+			})
 			vim.lsp.config("lua_ls", {
 				on_init = function(client)
 					if client.workspace_folders then
