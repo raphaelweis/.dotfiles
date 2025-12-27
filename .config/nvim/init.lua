@@ -327,7 +327,10 @@ require("lazy").setup({
 		"chomosuke/typst-preview.nvim",
 		ft = "typst",
 		version = "1.*",
-		opts = {},
+		opts = {
+			open_cmd = "firefox %s -P typst-preview --class typst-preview",
+			port = 8000,
+		},
 	},
 	{
 		"ThePrimeagen/harpoon",
