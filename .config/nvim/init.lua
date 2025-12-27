@@ -47,14 +47,21 @@ end, {
 	desc = "Toggle diagnostic virtual lines",
 })
 vim.keymap.set("t", "<ESC>", "<C-\\><C-N>")
-vim.keymap.set("t", "<C-[>", "<ESC>")
+vim.keymap.set("t", "<C-[>", "<C-\\><C-N>")
+vim.keymap.set("n", "<leader>bt", "<CMD>tab terminal<CR>")
+vim.keymap.set("n", "<leader>bv", "<CMD>rightbelow vsplit | terminal<CR>")
+vim.keymap.set("n", "<leader>bh", "<CMD>rightbelow split | terminal<CR>")
+vim.keymap.set({ "n", "t" }, "<C-h>", "<C-\\><C-N><C-W>h")
+vim.keymap.set({ "n", "t" }, "<C-j>", "<C-\\><C-N><C-W>j")
+vim.keymap.set({ "n", "t" }, "<C-k>", "<C-\\><C-N><C-W>k")
+vim.keymap.set({ "n", "t" }, "<C-l>", "<C-\\><C-N><C-W>l")
 
 -- Autocmds
 vim.api.nvim_create_autocmd("TermOpen", {
 	callback = function()
 		vim.opt.spell = false
+		vim.cmd.startinsert()
 	end,
-	desc = "Disable spellchecking in terminal windows",
 })
 
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -71,7 +78,7 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 require("lazy").setup({
-	{ "christoomey/vim-tmux-navigator" },
+	{ "tpope/vim-surround" },
 	{
 		"nvim-tree/nvim-tree.lua",
 		lazy = false,
@@ -321,5 +328,35 @@ require("lazy").setup({
 		ft = "typst",
 		version = "1.*",
 		opts = {},
+	},
+	{
+		"ThePrimeagen/harpoon",
+		branch = "harpoon2",
+		dependencies = { "nvim-lua/plenary.nvim" },
+		config = function()
+			local harpoon = require("harpoon")
+
+			harpoon:setup()
+
+			vim.keymap.set("n", "<leader>a", function()
+				harpoon:list():add()
+			end)
+			vim.keymap.set("n", "<leader>yf", function()
+				harpoon.ui:toggle_quick_menu(harpoon:list())
+			end)
+
+			vim.keymap.set("n", "<leader>u", function()
+				harpoon:list():select(1)
+			end)
+			vim.keymap.set("n", "<leader>i", function()
+				harpoon:list():select(2)
+			end)
+			vim.keymap.set("n", "<leader>o", function()
+				harpoon:list():select(3)
+			end)
+			vim.keymap.set("n", "<leader>p", function()
+				harpoon:list():select(4)
+			end)
+		end,
 	},
 })
