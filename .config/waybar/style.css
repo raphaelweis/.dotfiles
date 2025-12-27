@@ -6,6 +6,7 @@
   border: none;
   margin: 0;
   padding: 0;
+  min-height: 0;
 
   font-size: 12px;
   font-weight: bold;
@@ -14,26 +15,24 @@
 window#waybar {
   background-color: #10140f;
   color: #e0e4db;
-  padding: 6px 12px;
+  padding: 0 12px;
 }
 
 #workspaces {
-  padding: 4px;
+  padding: 4px 4px;
 }
 
 #workspaces button {
   color: #e0e4db;
   padding: 0 8px;
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 #workspaces button.active {
-  background-color: #3b693a;
-  color: #ecefe6;
-}
-
-#clock {
-  font-size: 14px;
+  /* background-color: #3b693a; */
+  /* color: #ecefe6; */
+  background-color: #e5e5e5;
+  color: #171717;
 }
 
 #cpu,
