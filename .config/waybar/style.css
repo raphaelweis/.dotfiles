@@ -35,6 +35,7 @@ window#waybar {
   color: #171717;
 }
 
+#pulseaudio,
 #cpu,
 #memory,
 #temperature,
@@ -55,7 +56,7 @@ window#waybar {
 }
 
 #battery.critical {
-  color: #BA1A1A;
+  color: #ba1a1a;
 }
 
 tooltip {

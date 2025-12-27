@@ -9,6 +9,7 @@
     "clock"
   ],
   "modules-right": [
+    "pulseaudio",
     "cpu",
     "memory",
     "temperature",
@@ -111,5 +112,18 @@
         "󰁹 "
       ]
     }
+  },
+  "pulseaudio": {
+    "format": "{icon}  {volume}%",
+    "format-bluetooth": " {icon}   {volume}%",
+    "format-muted": " ",
+    "format-icons": {
+      "default": [
+        " ",
+        " "
+      ]
+    },
+    "scroll-step": 1,
+    "on-click": "pavucontrol"
   }
 }
