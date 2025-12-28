@@ -20,7 +20,7 @@ cursor-invert-fg-bg = true
 adjust-cursor-thickness = 1
 
 # GTK integration (Linux)
-gtk-titlebar-hide-when-maximized = true
+gtk-titlebar-hide-when-maximized = false
 gtk-single-instance = true
 
 # Keybindings
