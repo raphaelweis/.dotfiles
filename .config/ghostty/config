@@ -4,7 +4,7 @@ theme = Builtin Tango Light
 
 font-family = monospace
 font-feature = -calt
-font-size = 10
+font-size = 14
 
 window-padding-x = 5
 window-padding-y = 5
@@ -27,4 +27,8 @@ gtk-single-instance = true
 keybind = ctrl+enter=unbind
 keybind = performable:alt+c=copy_to_clipboard
 keybind = performable:alt+v=paste_from_clipboard
+keybind = super+h=goto_split:left
+keybind = super+l=goto_split:right
+keybind = super+j=goto_split:down
+keybind = super+k=goto_split:up
 
