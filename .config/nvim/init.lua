@@ -121,18 +121,46 @@ require("lazy").setup({
 		lazy = false,
 		build = ":TSUpdate",
 		config = function()
+			local nvim_treesitter = require("nvim-treesitter")
+			local parsers = {
+				"bash",
+				"c",
+				"cpp",
+				"css",
+				"diff",
+				"dockerfile",
+				"git_config",
+				"git_rebase",
+				"gitattributes",
+				"gitcommit",
+				"gitignore",
+				"graphql",
+				"html",
+				"java",
+				"javascript",
+				"jsdoc",
+				"json",
+				"jsx",
+				"lua",
+				"make",
+				"markdown",
+				"markdown_inline",
+				"mermaid",
+				"prisma",
+				"python",
+				"sql",
+				"tsx",
+				"typescript",
+				"typst",
+				"vim",
+				"yaml",
+				"zsh",
+			}
+			nvim_treesitter.install(parsers)
 			vim.api.nvim_create_autocmd("FileType", {
-				callback = function(args)
-					local treesitter = require("nvim-treesitter")
-					local lang = vim.treesitter.language.get_lang(args.match)
-					if vim.list_contains(treesitter.get_available(), lang) then
-						if not vim.list_contains(treesitter.get_installed(), lang) then
-							treesitter.install(lang):wait()
-						end
-						vim.treesitter.start(args.buf)
-					end
+				callback = function()
+					pcall(vim.treesitter.start)
 				end,
-				desc = "Enable nvim-treesitter and install parser if not installed",
 			})
 		end,
 	},
@@ -328,7 +356,7 @@ require("lazy").setup({
 		ft = "typst",
 		version = "1.*",
 		opts = {
-			open_cmd = "epiphany %s",
+			open_cmd = "firefox --new-window %s",
 			port = 8000,
 		},
 	},
