@@ -20,7 +20,7 @@ cursor-invert-fg-bg = true
 adjust-cursor-thickness = 1
 
 # GTK integration (Linux)
-gtk-titlebar-hide-when-maximized = false
+gtk-titlebar-hide-when-maximized = true
 gtk-single-instance = true
 
 # Keybindings
@@ -31,4 +31,5 @@ keybind = super+h=goto_split:left
 keybind = super+l=goto_split:right
 keybind = super+j=goto_split:down
 keybind = super+k=goto_split:up
+keybind = ctrl+h=toggle_quick_terminal
 
