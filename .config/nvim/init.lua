@@ -114,7 +114,7 @@ require("lazy").setup({
 					strings = false,
 				},
 			})
-      vim.cmd.colorscheme "gruvbox"
+			vim.cmd.colorscheme("gruvbox")
 		end,
 	},
 	{
@@ -391,4 +391,5 @@ require("lazy").setup({
 			end)
 		end,
 	},
+	{ "nvim-mini/mini.statusline", opts = {} },
 })
