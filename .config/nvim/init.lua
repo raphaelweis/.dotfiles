@@ -6,7 +6,6 @@ vim.g.loaded_perl_provider = 0
 vim.g.loaded_python3_provider = 0
 vim.g.loaded_ruby_provider = 0
 
-vim.opt.background = "light"
 vim.opt.number = true
 vim.opt.termguicolors = true
 vim.opt.relativenumber = true
@@ -106,14 +105,11 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"Mofiqul/vscode.nvim",
+		"nyoom-engineering/oxocarbon.nvim",
+		lazy = false,
 		priority = 1000,
 		config = function()
-			require("vscode").setup({
-				transparent = false,
-				disable_nvimtree_bg = true,
-			})
-			vim.cmd.colorscheme("vscode")
+      vim.cmd.colorscheme "oxocarbon"
 		end,
 	},
 	{

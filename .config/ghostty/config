@@ -1,6 +1,6 @@
 # Appearance
 background-opacity = 1
-theme = Builtin Tango Light
+theme = GitHub Dark
 
 font-family = monospace
 font-feature = -calt
