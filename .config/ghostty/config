@@ -1,6 +1,6 @@
 # Appearance
 background-opacity = 1
-theme = GitHub Dark
+theme = Gruvbox Dark Hard
 
 font-family = monospace
 font-feature = -calt

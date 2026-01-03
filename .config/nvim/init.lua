@@ -105,11 +105,16 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"nyoom-engineering/oxocarbon.nvim",
-		lazy = false,
+		"ellisonleao/gruvbox.nvim",
 		priority = 1000,
 		config = function()
-      vim.cmd.colorscheme "oxocarbon"
+			require("gruvbox").setup({
+				contrast = "hard",
+				italic = {
+					strings = false,
+				},
+			})
+      vim.cmd.colorscheme "gruvbox"
 		end,
 	},
 	{
