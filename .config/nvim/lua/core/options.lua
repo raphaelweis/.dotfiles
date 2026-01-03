@@ -15,7 +15,7 @@ vim.opt.clipboard:append("unnamedplus")
 vim.opt.swapfile = false
 vim.opt.undofile = true
 vim.opt.signcolumn = "yes"
-vim.opt.winborder = "rounded"
 vim.opt.colorcolumn = "80"
+vim.opt.cursorline = false
 
 vim.diagnostic.config({ virtual_text = true })
