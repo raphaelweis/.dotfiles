@@ -3,6 +3,7 @@ local add, now = MiniDeps.add, MiniDeps.now
 now(function()
 	add("nvim-mini/mini.nvim")
 	add("tpope/vim-fugitive")
+	add("christoomey/vim-tmux-navigator")
 
 	require("mini.basics").setup()
 	require("mini.pairs").setup()
@@ -36,12 +37,12 @@ now(function()
 		},
 	})
 	require("mini.files").setup({
-    windows = {
-      preview = true,
-      width_preview = 100
-    }
-  })
-  require("mini.notify").setup()
+		windows = {
+			preview = true,
+			width_preview = 100,
+		},
+	})
+	require("mini.notify").setup()
 
 	vim.keymap.set("n", "<leader>e", MiniFiles.open)
 
