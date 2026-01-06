@@ -5,7 +5,7 @@ if [[ $# -eq 1 ]]; then
 else
   selected=$(
     {
-      find ~/D -mindepth 1 -maxdepth 1 -type d
+      find ~/D ~/W -mindepth 1 -maxdepth 1 -type d
       printf '%s\n' "$HOME/.dotfiles"
     } | fzf
   )
