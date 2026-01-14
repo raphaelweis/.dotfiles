@@ -3,8 +3,6 @@ return {
 		"echasnovski/mini.nvim",
 		config = function()
 			require("mini.basics").setup()
-			require("mini.statusline").setup()
-			require("mini.tabline").setup()
 			require("mini.comment").setup()
 			require("mini.snippets").setup()
 			require("mini.notify").setup()
