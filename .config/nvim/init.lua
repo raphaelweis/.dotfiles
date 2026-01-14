@@ -1,35 +1,19 @@
------------------------------------------------------------------------
--- Bootstrap mini.nvim + mini.deps
------------------------------------------------------------------------
-local minipath = vim.fn.stdpath("data") .. "/site/pack/deps/start/mini.nvim"
-if not vim.loop.fs_stat(minipath) then
+-- Bootstrap lazy.nvim
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.uv.fs_stat(lazypath) then
 	vim.fn.system({
 		"git",
 		"clone",
 		"--filter=blob:none",
-		"https://github.com/echasnovski/mini.nvim",
-		minipath,
+		"https://github.com/folke/lazy.nvim.git",
+		"--branch=stable",
+		lazypath,
 	})
 end
+vim.opt.rtp:prepend(lazypath)
 
-require("mini.deps").setup({
-	path = { package = vim.fn.stdpath("data") .. "/site" },
-})
-
------------------------------------------------------------------------
--- Core configuration
------------------------------------------------------------------------
 require("core.options")
 require("core.keymaps")
 require("core.autocmds")
 
------------------------------------------------------------------------
--- Plugins
------------------------------------------------------------------------
-require("plugins.colorscheme")
-require("plugins.mini")
-require("plugins.treesitter")
-require("plugins.lsp")
-require("plugins.conform")
-require("plugins.harpoon")
-require("plugins.opencode")
+require("lazy").setup("plugins")
