@@ -1,7 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="robbyrussell"
 
-zstyle ':omz:plugins:nvm' lazy yes
 plugins=(
   git
   zsh-syntax-highlighting
@@ -17,12 +16,13 @@ compinit
 alias ta="tmux attach"
 alias la="ls -la"
 alias vim="nvim"
+alias sslyze="docker run --rm -it nablac0d3/sslyze:latest"
 
 bindkey -e
 bindkey -s '^[s' 'tmux-sessionizer\n'
 
 export EDITOR=nvim
-export PATH=$PATH:"$HOME/.local/bin":"$HOME/bin"
+export PATH=$PATH:"$HOME/.local/bin":"$HOME/bin":"$HOME/go/bin"
 
 # export NVM_DIR="$HOME/.nvm"
 # [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
@@ -31,3 +31,7 @@ export PATH=$PATH:"$HOME/.local/bin":"$HOME/bin"
 
 # opencode
 export PATH=/home/raphaelw/.opencode/bin:$PATH
+
+if [[ "$(uname)" = "Darwin" ]]; then
+  export NODE_EXTRA_CA_CERTS="$HOME/Documents/ZscalerRootCA.crt"
+fi
