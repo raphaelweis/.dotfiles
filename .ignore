@@ -1,3 +1,4 @@
 !.dotfiles/.config/
 !D/**/*.env
+!W/**/*.env
 !*.pdf

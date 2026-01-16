@@ -17,7 +17,9 @@ return {
 			lualine_z = { "location" },
 		},
 		tabline = {
-			lualine_a = { "buffers" },
+			lualine_a = {
+				{ "buffers", mode = 2 },
+			},
 			lualine_z = { "tabs" },
 		},
 	},
