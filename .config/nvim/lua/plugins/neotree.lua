@@ -13,6 +13,15 @@ return {
 				window = {
 					width = 60,
 				},
+				filesystem = {
+					filtered_items = {
+            visible = true,
+						hide_dotfiles = false,
+					},
+					follow_current_file = {
+						enabled = true,
+					},
+				},
 			})
 
 			vim.keymap.set("n", "<leader>e", "<CMD>Neotree toggle<CR>")
