@@ -17,5 +17,6 @@ vim.opt.undofile = true
 vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 vim.opt.cursorline = false
+vim.opt.splitbelow = false
 
 vim.diagnostic.config({ virtual_text = true })
