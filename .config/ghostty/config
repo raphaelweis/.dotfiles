@@ -27,8 +27,10 @@ gtk-single-instance = true
 keybind = ctrl+enter=unbind
 keybind = performable:alt+c=copy_to_clipboard
 keybind = performable:alt+v=paste_from_clipboard
-keybind = super+h=goto_split:left
-keybind = super+l=goto_split:right
-keybind = super+j=goto_split:down
-keybind = super+k=goto_split:up
+keybind = alt+v=new_split:right
+keybind = alt+s=new_split:down
+keybind = alt+h=goto_split:left
+keybind = alt+l=goto_split:right
+keybind = alt+j=goto_split:down
+keybind = alt+k=goto_split:up
 
