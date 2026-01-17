@@ -1,6 +1,5 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
@@ -21,6 +20,12 @@ return {
 		telescope.setup({
 			defaults = {
 				file_ignore_patterns = { "node_modules", ".git/" },
+				sorting_strategy = "ascending",
+				layout_config = {
+					horizontal = {
+						prompt_position = "top",
+					},
+				},
 			},
 		})
 		telescope.load_extension("fzf")

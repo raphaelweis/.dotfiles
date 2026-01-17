@@ -1,3 +1,4 @@
+-- hello
 vim.keymap.set("n", "<Esc>", "<Cmd>noh<CR>")
 vim.keymap.set("n", "k", "v:count == 0 ? 'gk' : 'k'", { expr = true })
 vim.keymap.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true })
@@ -11,7 +12,8 @@ vim.keymap.set("n", "td", function()
 end)
 
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
-vim.keymap.set({ "n", "t" }, "<C-h>", "<C-\\><C-n><C-w>h")
-vim.keymap.set({ "n", "t" }, "<C-j>", "<C-\\><C-n><C-w>j")
-vim.keymap.set({ "n", "t" }, "<C-k>", "<C-\\><C-n><C-w>k")
-vim.keymap.set({ "n", "t" }, "<C-l>", "<C-\\><C-n><C-w>l")
+
+vim.keymap.set("n", "=", "<CMD>vertical resize +5<CR>")
+vim.keymap.set("n", "-", "<CMD>vertical resize -5<CR>")
+vim.keymap.set("n", "+", "<CMD>horizontal resize +2<CR>")
+vim.keymap.set("n", "_", "<CMD>horizontal resize -2<CR>")

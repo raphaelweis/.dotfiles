@@ -10,9 +10,6 @@ return {
 		lazy = false,
 		config = function()
 			require("neo-tree").setup({
-				window = {
-					width = 60,
-				},
 				filesystem = {
 					filtered_items = {
             visible = true,
