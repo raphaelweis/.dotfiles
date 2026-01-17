@@ -2,7 +2,16 @@ return {
 	{
 		"mfussenegger/nvim-dap",
 		config = function()
+			local dap = require("dap")
+
 			vim.fn.sign_define("DapBreakpoint", {
+				text = " ",
+				texthl = "DapBreakpointColor",
+				linehl = "",
+				numhl = "",
+			})
+
+			vim.fn.sign_define("DapBreakpointRejected", {
 				text = " ",
 				texthl = "DapBreakpointColor",
 				linehl = "",
@@ -11,24 +20,28 @@ return {
 
 			-- Keymaps
 			vim.keymap.set("n", "<leader>b", function()
-				require("dap").toggle_breakpoint()
+				dap.toggle_breakpoint()
 			end)
 			vim.keymap.set("n", "<F5>", function()
-				require("dap").continue()
+				dap.continue()
 			end)
 			vim.keymap.set("n", "<F10>", function()
-				require("dap").step_over()
+				dap.step_over()
 			end)
 			vim.keymap.set("n", "<F11>", function()
-				require("dap").step_into()
+				dap.step_into()
 			end)
 			vim.keymap.set("n", "<F12>", function()
-				require("dap").step_out()
+				dap.step_out()
 			end)
 			vim.keymap.set("n", "<leader>do", "<CMD>DapViewToggle<CR>")
 
+			------------------------
 			-- Adapter configuration
-			require("dap").adapters["pwa-node"] = {
+			------------------------
+
+			-- JS/TS
+			dap.adapters["pwa-node"] = {
 				type = "server",
 				host = "localhost",
 				port = "${port}",
@@ -37,8 +50,21 @@ return {
 					args = { vim.fn.expand("~") .. "/.local/share/js-debug/src/dapDebugServer.js", "${port}" },
 				},
 			}
+			if not dap.adapters["node"] then
+				dap.adapters["node"] = function(cb, config)
+					if config.type == "node" then
+						config.type = "pwa-node"
+					end
+					local nativeAdapter = dap.adapters["pwa-node"]
+					if type(nativeAdapter) == "function" then
+						nativeAdapter(cb, config)
+					else
+						cb(nativeAdapter)
+					end
+				end
+			end
 
-			require("dap").configurations.javascript = {
+			dap.configurations.javascript = {
 				{
 					type = "pwa-node",
 					request = "launch",
@@ -48,7 +74,7 @@ return {
 				},
 			}
 
-			require("dap").configurations.typescript = {
+			dap.configurations.typescript = {
 				{
 					type = "pwa-node",
 					request = "launch",
