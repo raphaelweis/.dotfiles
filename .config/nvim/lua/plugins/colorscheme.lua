@@ -13,6 +13,8 @@ return {
 				DiagnosticSignWarn = { bg = "NONE", fg = colors.bright_yellow },
 				DiagnosticSignHint = { bg = "NONE", fg = colors.bright_aqua },
 				DapBreakpointColor = { fg = colors.bright_red },
+				DapBreakpointColorRejected = { fg = colors.neutral_red },
+				DapBreakpointStopped = { fg = colors.bright_aqua },
 			},
 		})
 		vim.cmd.colorscheme("gruvbox")

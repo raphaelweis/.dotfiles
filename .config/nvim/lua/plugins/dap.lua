@@ -5,17 +5,18 @@ return {
 			local dap = require("dap")
 
 			vim.fn.sign_define("DapBreakpoint", {
-				text = " ",
+				text = " ",
 				texthl = "DapBreakpointColor",
-				linehl = "",
-				numhl = "",
 			})
 
 			vim.fn.sign_define("DapBreakpointRejected", {
-				text = " ",
-				texthl = "DapBreakpointColor",
-				linehl = "",
-				numhl = "",
+				text = " ",
+				texthl = "DapBreakpointColorRejected",
+			})
+
+			vim.fn.sign_define("DapStopped", {
+				text = " ",
+				texthl = "DapBreakpointStopped",
 			})
 
 			-- Keymaps

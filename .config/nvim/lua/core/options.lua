@@ -14,7 +14,7 @@ vim.opt.expandtab = true
 vim.opt.clipboard:append("unnamedplus")
 vim.opt.swapfile = false
 vim.opt.undofile = true
-vim.opt.signcolumn = "yes:2"
+vim.opt.signcolumn = "yes"
 vim.opt.colorcolumn = "80"
 vim.opt.cursorline = false
 vim.opt.splitbelow = false

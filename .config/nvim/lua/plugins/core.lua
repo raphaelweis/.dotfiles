@@ -11,6 +11,6 @@ return {
 
 	{ "tpope/vim-surround", event = "VeryLazy" },
 	{ "shortcuts/no-neck-pain.nvim" },
-	{ "tpope/vim-fugitive", cmd = "Git", keys = { { "<leader>;", "<CMD>tab Git<CR>", desc = "Git status" } } },
+	{ "tpope/vim-fugitive", cmd = "Git", keys = { { "<leader>;", "<CMD>Git<CR>", desc = "Git status" } } },
 	-- { "christoomey/vim-tmux-navigator", lazy = false },
 }
