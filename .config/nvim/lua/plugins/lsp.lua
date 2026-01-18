@@ -13,6 +13,7 @@ return {
 			"qmlls",
 			"tinymist",
 			"pyright",
+			"graphql",
 		})
 
 		vim.lsp.config("tinymist", {

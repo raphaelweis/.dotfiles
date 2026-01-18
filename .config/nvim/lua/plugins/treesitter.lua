@@ -3,7 +3,7 @@ return {
 		"nvim-treesitter/nvim-treesitter",
 		build = ":TSUpdate",
 		config = function()
-			require("nvim-treesitter").install({
+			local parsers = {
 				"bash",
 				"c",
 				"cpp",
@@ -27,11 +27,14 @@ return {
 				"yaml",
 				"zsh",
 				"typst",
-			})
+			}
+
+			require("nvim-treesitter").install(parsers)
 
 			vim.api.nvim_create_autocmd("FileType", {
+				pattern = parsers,
 				callback = function()
-					pcall(vim.treesitter.start)
+					vim.treesitter.start()
 				end,
 			})
 		end,
