@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/themes/github_dark_default.toml"
+    "~/.config/alacritty/themes/gruvbox.toml"
 ]
 
 [font]
@@ -16,7 +16,6 @@ hide_when_typing = true
 
 [window]
 opacity = 1
-startup_mode = "Maximized"
 
 [window.padding]
 x = 5

@@ -1,36 +1,34 @@
-export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="robbyrussell"
+HISTFILE=~/.zsh_history
+HISTSIZE=100000
+SAVEHIST=100000
 
-plugins=(
-  git
-  zsh-syntax-highlighting
-  zsh-autosuggestions
-  nvm
-)
+autoload -U compinit; compinit
 
-source "$ZSH/oh-my-zsh.sh"
-
-autoload -Uz compinit
-compinit
-
-alias ta="tmux attach"
 alias la="ls -la"
-alias vim="nvim"
-alias sslyze="docker run --rm -it nablac0d3/sslyze:latest"
+alias zed='zeditor'
+alias ta='tmux attach'
+alias ts='tmux-sessionizer'
 
 bindkey -e
-bindkey -s '^[s' 'tmux-sessionizer\n'
 
-export EDITOR=nvim
-export PATH=$PATH:"$HOME/.local/bin":"$HOME/.local/scripts":"$HOME/bin":"$HOME/go/bin"
+export EDITOR="zeditor --wait"
+export N_PREFIX=$HOME/.n
+export PATH=$PATH:"$HOME/.local/bin":"$HOME/.local/scripts":"$HOME/bin":"$HOME/go/bin":"$HOME/.opencode/bin":"$N_PREFIX/bin"
 
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# zsh plugins
+if [[ ! -d "$HOME/.zsh/zsh-syntax-highlighting" ]] then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $HOME/.zsh/zsh-syntax-highlighting
+fi
+if [[ ! -d "$HOME/.zsh/zsh-autosuggestions" ]] then
+  git clone https://github.com/zsh-users/zsh-autosuggestions.git $HOME/.zsh/zsh-autosuggestions
+fi
 
-# opencode
-export PATH=/home/raphaelw/.opencode/bin:$PATH
+source ~/.zsh/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh
+source <(fzf --zsh)
 
 if [[ "$(uname)" = "Darwin" ]]; then
   export NODE_EXTRA_CA_CERTS="$HOME/Documents/ZscalerRootCA.crt"
 fi
+
+eval "$(starship init zsh)"
