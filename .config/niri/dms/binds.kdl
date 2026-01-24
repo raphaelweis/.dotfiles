@@ -79,6 +79,7 @@ binds {
     Mod+O { set-column-width "33.333333333%"; }
     Mod+P { set-column-width "66.6666666666%"; }
     Mod+F { maximize-window-to-edges; }
+    Mod+Shift+F { maximize-column; }
     Mod+H { focus-column-left; }
     Mod+Home { focus-column-first; }
     Mod+L { focus-column-right; }
@@ -98,7 +99,6 @@ binds {
     Mod+Shift+Ctrl+Up { move-column-to-monitor-up; }
     Mod+Shift+Down { move-window-down; }
     Mod+Shift+Equal { set-window-height "+10%"; }
-    Mod+Shift+F { fullscreen-window; }
     Mod+Shift+H { move-column-left; }
     Mod+Shift+L { move-column-right; }
     Mod+Shift+Left { move-column-left; }
