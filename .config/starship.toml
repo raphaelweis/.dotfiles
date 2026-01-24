@@ -1,0 +1,6 @@
+# Disable the cloud module
+[gcloud]
+disabled = true
+
+[git_status]
+use_git_executable = true
