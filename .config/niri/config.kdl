@@ -41,7 +41,7 @@ input {
 // Find more information on the wiki:
 // https://github.com/YaLTeR/niri/wiki/Configuration:-Layout
 layout {
-    gaps 0
+    gaps 8
 
     focus-ring {
         width 0
@@ -76,7 +76,7 @@ layout {
     // Alternatively, you can override it with a window rule called
     // `draw-border-with-background`.
     border {
-        width 0
+        width 2
     }
     shadow {
         softness 30
@@ -147,6 +147,10 @@ animations {
 // Work around WezTerm's initial configure bug
 // by setting an empty default-column-width.
 window-rule {
+    geometry-corner-radius 12
+}
+
+window-rule {
     // This regular expression is intentionally made as specific as possible,
     // since this is the default config, and we want no false positives.
     // You can get away with just app-id="wezterm" if you want.
@@ -156,7 +160,6 @@ window-rule {
 window-rule {
     match app-id=r#"^org\.gnome\."#
     draw-border-with-background false
-    geometry-corner-radius 12
     clip-to-geometry true
 }
 window-rule {
@@ -175,7 +178,6 @@ window-rule {
     match app-id=r#"^gnome-calculator$"#
     match app-id=r#"^galculator$"#
     match app-id=r#"^blueman-manager$"#
-    match app-id=r#"^org\.gnome\.Nautilus$"#
     match app-id=r#"^steam$"#
     match app-id=r#"^xdg-desktop-portal$"#
     open-floating true
@@ -197,14 +199,6 @@ window-rule {
 window-rule {
     match app-id=r#"org.quickshell$"#
     open-floating true
-}
-
-window-rule {
-    // Match floating windows
-    match is-floating=true
-
-    // Set corner radius to 12 for floating windows
-    geometry-corner-radius 12.0
 }
 
 debug {
