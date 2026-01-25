@@ -76,7 +76,8 @@ binds {
     Mod+Ctrl+WheelScrollRight { move-column-right; }
     Mod+End { focus-column-last; }
     Mod+Equal { set-column-width "+10%"; }
-    Mod+O { set-column-width "33.333333333%"; }
+    Mod+I { set-column-width "33.333333333%"; }
+    Mod+O { set-column-width "50%"; }
     Mod+P { set-column-width "66.6666666666%"; }
     Mod+F { maximize-window-to-edges; }
     Mod+Shift+F { maximize-column; }
