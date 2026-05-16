@@ -18,7 +18,7 @@
     "dock": "left",
   },
   "git_panel": {
-    "dock": "left",
+    "dock": "right",
   },
   "tabs": {
     "git_status": true,
@@ -47,7 +47,7 @@
   "buffer_font_family": "JetBrainsMonoNL Nerd Font",
   "icon_theme": "Material Icon Theme",
   "project_panel": {
-    "dock": "left",
+    "dock": "right",
     "hide_root": true,
   },
   "relative_line_numbers": "enabled",

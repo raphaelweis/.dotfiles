@@ -25,7 +25,12 @@ alias ts="tmux-sessionizer"
 alias la="ls -la"
 alias vim="nvim"
 
-export EDITOR="zed"
+if [[ $(uname) == "Darwin" ]]; then
+  export EDITOR="zed --wait"
+else
+  export EDITOR="zeditor --wait"
+fi
+
 export PATH="/opt/homebrew/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
 setopt PROMPT_SUBST
@@ -49,4 +54,3 @@ esac
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /opt/homebrew/bin/terraform terraform
-

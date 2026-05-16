@@ -6,6 +6,7 @@
         nautilus
         gnomeExtensions.appindicator
         gnomeExtensions.just-perfection
+        gnomeExtensions.xremap
       ];
 
       services = {
@@ -34,6 +35,7 @@
                 enabled-extensions = with pkgs.gnomeExtensions; [
                   appindicator.extensionUuid
                   just-perfection.extensionUuid
+                  xremap.extensionUuid
                 ];
                 favorite-apps = lib.gvariant.mkEmptyArray (lib.gvariant.type.string);
               };

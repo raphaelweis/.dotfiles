@@ -1,7 +1,3 @@
-{
-  self,
-  ...
-}:
 let
   username = "raph";
   name = "Raph";
@@ -29,5 +25,7 @@ in
       programs.zsh.enable = true;
 
       sops.age.keyFile = "/home/${username}/.config/sops/age/keys.txt";
+
+      services.xremap.userName = username;
     };
 }

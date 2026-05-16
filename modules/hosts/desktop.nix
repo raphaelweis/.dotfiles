@@ -19,8 +19,9 @@
       flatpak
       docker
 
-      # desktop
+      # desktop / services
       gnome
+      xremap
 
       # programs
       steam

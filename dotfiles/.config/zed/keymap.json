@@ -77,4 +77,16 @@
       "alt-t": "workspace::NewTerminal",
     },
   },
+  {
+    "context": "Workspace",
+    "bindings": {
+      "alt-shift-t": "pane::ReopenClosedItem"
+    }
+  },
+  {
+    "context": "Workspace",
+    "unbind": {
+      "ctrl-shift-t": "pane::ReopenClosedItem"
+    }
+  }
 ]
