@@ -18,6 +18,7 @@
           zathura
           keepassxc
           ghostty
+          modrinth-app
           (callPackage ../packages/helium.nix { })
         ]
         ++ [
